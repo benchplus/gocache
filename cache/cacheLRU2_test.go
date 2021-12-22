@@ -16,6 +16,14 @@ func BenchmarkPutInt_cacheLRU2(b *testing.B) {
 	}
 }
 
+func BenchmarkGetInt_cacheLRU2(b *testing.B) {
+	cache := cache.NewLRUCache(1024, 1024, 10*time.Second).LRU2(1024)
+	cache.Put("0", 0)
+	for i := 0; i < b.N; i++ {
+		cache.Get("0")
+	}
+}
+
 func BenchmarkPut1K_cacheLRU2(b *testing.B) {
 	cache := cache.NewLRUCache(1024, 1024, 10*time.Second).LRU2(1024)
 	for i := 0; i < b.N; i++ {
