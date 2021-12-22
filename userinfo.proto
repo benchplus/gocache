@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package gocache;
+
+message UserInfo {
+    string name = 1;
+    int32 age = 2;
+    int32 gender = 3;
+    string company = 4;
+    repeated string skills = 5;
+}
