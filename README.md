@@ -1,5 +1,5 @@
-# benchplus gocache
 
+<p align="center">Simple performance comparison of cache libraries written in golang.</p>
 <p align="center">
   <a href="https://github.com/benchplus/gocache/actions?query=workflow%3A%22gocache%22" alt="action status">
     <img src="https://github.com/benchplus/gocache/workflows/gocache/badge.svg"/>
@@ -8,7 +8,6 @@
     <img src="https://img.shields.io/badge/report-click--me-brightgreen.svg?style=flat">
   </a>
 </p>
-<p align="center">Simple performance comparison of cache libraries written in golang.</p>
 
 
 # Reports
@@ -22,7 +21,7 @@
 
 - `gcache` is 256 shards as default
 
-# List of libraries
+# Libraries
 
 - [bigcache](https://github.com/allegro/bigcache)
 
