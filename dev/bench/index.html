@@ -196,7 +196,7 @@
                   borderColor: color,
                   backgroundColor: color + '60', // Add alpha for #rrggbbaa
                 }
-              if (e.libName == 'bigcache' && method == 'Put1M') {
+              if (e.libName in ['bigcache', 'freecache'] && method == 'Put1M') {
                 d['hidden'] = true;
               }
               data.datasets.push(d)
