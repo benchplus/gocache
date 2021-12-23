@@ -23,14 +23,14 @@ func shutdown() {
 }
 
 func BenchmarkPutInt_gcache(b *testing.B) {
-	cache := gcache.New(1024 * 1024).LRU().Build()
+	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N; i++ {
 		cache.Set(i, i)
 	}
 }
 
 func BenchmarkGetInt_gcache(b *testing.B) {
-	cache := gcache.New(1024 * 1024).LRU().Build()
+	cache := gcache.New(256 * 32).LRU().Build()
 	cache.Set("0", "0")
 	for i := 0; i < b.N; i++ {
 		cache.Get("0")
@@ -38,21 +38,21 @@ func BenchmarkGetInt_gcache(b *testing.B) {
 }
 
 func BenchmarkPut1K_gcache(b *testing.B) {
-	cache := gcache.New(1024 * 1024).LRU().Build()
+	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N; i++ {
 		cache.Set(i, gocache.Data1K)
 	}
 }
 
 func BenchmarkPut1M_gcache(b *testing.B) {
-	cache := gcache.New(1024 * 1024).LRU().Build()
+	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N; i++ {
 		cache.Set(i, gocache.Data1M)
 	}
 }
 
 func BenchmarkPutTinyObject_gcache(b *testing.B) {
-	cache := gcache.New(1024 * 1024).LRU().Build()
+	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N; i++ {
 		data, _ := proto.Marshal(&gocache.UserInfo{})
 		cache.Set(i, data)
@@ -60,7 +60,7 @@ func BenchmarkPutTinyObject_gcache(b *testing.B) {
 }
 
 func BenchmarkChangeOutAllInt_gcache(b *testing.B) {
-	cache := gcache.New(1024 * 1024).LRU().Build()
+	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N*1024; i++ {
 		cache.Set(i, i)
 	}

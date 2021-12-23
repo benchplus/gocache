@@ -18,7 +18,9 @@
 
 # Default parameters
 
-`1024` shards * `1024` items, `10s` expiration
+- 256 shards * 32 items, 10s expiration
+
+- `gcache` is 256 shards as default
 
 # List of libraries
 

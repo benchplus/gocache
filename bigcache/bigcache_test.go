@@ -26,10 +26,10 @@ func shutdown() {
 
 func BenchmarkPutInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             1024,
+		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 1024 * 10,
-		MaxEntrySize:       1024,
+		MaxEntrySize:       32,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -40,10 +40,10 @@ func BenchmarkPutInt_bigcache(b *testing.B) {
 
 func BenchmarkGetInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             1024,
+		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 1024 * 10,
-		MaxEntrySize:       1024,
+		MaxEntrySize:       32,
 		Verbose:            false,
 	})
 	cache.Set("0", []byte("0"))
@@ -54,10 +54,10 @@ func BenchmarkGetInt_bigcache(b *testing.B) {
 
 func BenchmarkPut1K_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             1024,
+		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 1024 * 10,
-		MaxEntrySize:       1024,
+		MaxEntrySize:       32,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -67,10 +67,10 @@ func BenchmarkPut1K_bigcache(b *testing.B) {
 
 func BenchmarkPut1M_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             1024,
+		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 1024 * 10,
-		MaxEntrySize:       1024,
+		MaxEntrySize:       32,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -80,10 +80,10 @@ func BenchmarkPut1M_bigcache(b *testing.B) {
 
 func BenchmarkPutTinyObject_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             1024,
+		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 1024 * 10,
-		MaxEntrySize:       1024,
+		MaxEntrySize:       32,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -94,10 +94,10 @@ func BenchmarkPutTinyObject_bigcache(b *testing.B) {
 
 func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             1024,
+		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 1024 * 10,
-		MaxEntrySize:       1024,
+		MaxEntrySize:       32,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N*1024; i++ {
