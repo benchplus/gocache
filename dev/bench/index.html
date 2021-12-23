@@ -188,12 +188,16 @@
 
             dataset.forEach((e, index) => {
               const color = Colors[index%Colors.length];
-              data.datasets.push({
+              let d = {
                   label: e.libName,
                   data: [e.bench.value],
                   borderColor: color,
                   backgroundColor: color + '60', // Add alpha for #rrggbbaa
-                })
+                }
+              if (e.libName == 'bigcache' && method == 'Put1M') {
+                d['hidden'] = true;
+              }
+              data.datasets.push(d)
             });
 
             const options = {
@@ -219,6 +223,10 @@
               },
               tooltips: {
                 callbacks: {
+                  title: items => {
+                    const { datasetIndex } = items[0];
+                    return dataset[datasetIndex].libName;
+                  },
                   label: item => {
                     let label = item.value;
                     const { range, unit } = dataset[item.index].bench;
