@@ -15,6 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
+      - name: Clean environment
+        run: go clean --modcache && go mod tidy
       - name: Run benchmark
         run: go test -bench=. ./... | tee output.txt
       - name: Store benchmark result
@@ -30,4 +32,4 @@ jobs:
           comment-on-alert: true
           fail-on-alert: true
           alert-comment-cc-users: '@orca-zhang'
-          max-items-in-chart: 3
+          max-items-in-chart: 5
