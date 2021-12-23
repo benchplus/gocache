@@ -1,212 +1,8 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1640274850532,
+  "lastUpdate": 1640279663028,
   "repoUrl": "https://github.com/benchplus/gocache",
   "entries": {
     "gocache": [
-      {
-        "commit": {
-          "author": {
-            "email": "orca.zhang@yahoo.com",
-            "name": "Orca",
-            "username": "orca-zhang"
-          },
-          "committer": {
-            "email": "orca.zhang@yahoo.com",
-            "name": "Orca",
-            "username": "orca-zhang"
-          },
-          "distinct": true,
-          "id": "3ee2086d7137ef99262e8276b3d8bf26d4692347",
-          "message": ":wrench: revert clean",
-          "timestamp": "2021-12-23T23:37:12+08:00",
-          "tree_id": "bbf53c95434492d3db8dfb721a5c5881770007bb",
-          "url": "https://github.com/benchplus/gocache/commit/3ee2086d7137ef99262e8276b3d8bf26d4692347"
-        },
-        "date": 1640273909162,
-        "tool": "go",
-        "benches": [
-          {
-            "name": "BenchmarkPutInt_bigcache",
-            "value": 640,
-            "unit": "ns/op",
-            "extra": "1741130 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkGetInt_bigcache",
-            "value": 86,
-            "unit": "ns/op",
-            "extra": "13636472 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1K_bigcache",
-            "value": 1708,
-            "unit": "ns/op",
-            "extra": "914720 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1M_bigcache",
-            "value": 937848,
-            "unit": "ns/op",
-            "extra": "1438 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutTinyObject_bigcache",
-            "value": 1076,
-            "unit": "ns/op",
-            "extra": "1000000 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkChangeOutAllInt_bigcache",
-            "value": 653237,
-            "unit": "ns/op",
-            "extra": "2190 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutInt_cacheLRU2",
-            "value": 746,
-            "unit": "ns/op",
-            "extra": "1573032 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkGetInt_cacheLRU2",
-            "value": 145,
-            "unit": "ns/op",
-            "extra": "8252334 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1K_cacheLRU2",
-            "value": 739,
-            "unit": "ns/op",
-            "extra": "1540170 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1M_cacheLRU2",
-            "value": 735,
-            "unit": "ns/op",
-            "extra": "1747101 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutTinyObject_cacheLRU2",
-            "value": 820,
-            "unit": "ns/op",
-            "extra": "1505526 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkChangeOutAllInt_cacheLRU2",
-            "value": 727012,
-            "unit": "ns/op",
-            "extra": "1978 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutInt_cache",
-            "value": 787,
-            "unit": "ns/op",
-            "extra": "1874859 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkGetInt_cache",
-            "value": 144,
-            "unit": "ns/op",
-            "extra": "8608927 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1K_cache",
-            "value": 824,
-            "unit": "ns/op",
-            "extra": "1817122 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1M_cache",
-            "value": 815,
-            "unit": "ns/op",
-            "extra": "1852863 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutTinyObject_cache",
-            "value": 833,
-            "unit": "ns/op",
-            "extra": "1534456 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkChangeOutAllInt_cache",
-            "value": 805344,
-            "unit": "ns/op",
-            "extra": "1758 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutInt_freecache",
-            "value": 570,
-            "unit": "ns/op",
-            "extra": "2144572 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkGetInt_freecache",
-            "value": 189,
-            "unit": "ns/op",
-            "extra": "6299010 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1K_freecache",
-            "value": 869,
-            "unit": "ns/op",
-            "extra": "1507597 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1M_freecache",
-            "value": 158,
-            "unit": "ns/op",
-            "extra": "7428997 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutTinyObject_freecache",
-            "value": 914,
-            "unit": "ns/op",
-            "extra": "1358278 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkChangeOutAllInt_freecache",
-            "value": 576159,
-            "unit": "ns/op",
-            "extra": "2595 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutInt_gcache",
-            "value": 673,
-            "unit": "ns/op",
-            "extra": "2045194 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkGetInt_gcache",
-            "value": 76.3,
-            "unit": "ns/op",
-            "extra": "13746824 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1K_gcache",
-            "value": 704,
-            "unit": "ns/op",
-            "extra": "2098689 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPut1M_gcache",
-            "value": 682,
-            "unit": "ns/op",
-            "extra": "2118549 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkPutTinyObject_gcache",
-            "value": 1030,
-            "unit": "ns/op",
-            "extra": "1250029 times\n2 procs"
-          },
-          {
-            "name": "BenchmarkChangeOutAllInt_gcache",
-            "value": 664011,
-            "unit": "ns/op",
-            "extra": "1932 times\n2 procs"
-          }
-        ]
-      },
       {
         "commit": {
           "author": {
@@ -1020,6 +816,210 @@ window.BENCHMARK_DATA = {
             "value": 727379,
             "unit": "ns/op",
             "extra": "1771 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "orca.zhang@yahoo.com",
+            "name": "Orca",
+            "username": "orca-zhang"
+          },
+          "committer": {
+            "email": "orca.zhang@yahoo.com",
+            "name": "Orca",
+            "username": "orca-zhang"
+          },
+          "distinct": true,
+          "id": "1dab065e704ead345f6f7c77307c3be43d3853f1",
+          "message": ":ox:  update version",
+          "timestamp": "2021-12-24T01:12:59+08:00",
+          "tree_id": "ec31cae26afe31510c56920faab5b6fc3ff3e852",
+          "url": "https://github.com/benchplus/gocache/commit/1dab065e704ead345f6f7c77307c3be43d3853f1"
+        },
+        "date": 1640279662576,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "BenchmarkPutInt_bigcache",
+            "value": 665,
+            "unit": "ns/op",
+            "extra": "1599394 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkGetInt_bigcache",
+            "value": 99.6,
+            "unit": "ns/op",
+            "extra": "11836088 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1K_bigcache",
+            "value": 1865,
+            "unit": "ns/op",
+            "extra": "869968 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1M_bigcache",
+            "value": 984888,
+            "unit": "ns/op",
+            "extra": "1340 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutTinyObject_bigcache",
+            "value": 1199,
+            "unit": "ns/op",
+            "extra": "909457 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkChangeOutAllInt_bigcache",
+            "value": 749626,
+            "unit": "ns/op",
+            "extra": "2005 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutInt_cacheLRU2",
+            "value": 680,
+            "unit": "ns/op",
+            "extra": "1631080 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkGetInt_cacheLRU2",
+            "value": 48.3,
+            "unit": "ns/op",
+            "extra": "23479405 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1K_cacheLRU2",
+            "value": 714,
+            "unit": "ns/op",
+            "extra": "1713702 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1M_cacheLRU2",
+            "value": 715,
+            "unit": "ns/op",
+            "extra": "1917700 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutTinyObject_cacheLRU2",
+            "value": 791,
+            "unit": "ns/op",
+            "extra": "1751736 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkChangeOutAllInt_cacheLRU2",
+            "value": 686855,
+            "unit": "ns/op",
+            "extra": "1749 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutInt_cache",
+            "value": 615,
+            "unit": "ns/op",
+            "extra": "1795051 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkGetInt_cache",
+            "value": 43.1,
+            "unit": "ns/op",
+            "extra": "25409151 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1K_cache",
+            "value": 804,
+            "unit": "ns/op",
+            "extra": "1645688 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1M_cache",
+            "value": 795,
+            "unit": "ns/op",
+            "extra": "1625199 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutTinyObject_cache",
+            "value": 762,
+            "unit": "ns/op",
+            "extra": "1688401 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkChangeOutAllInt_cache",
+            "value": 638828,
+            "unit": "ns/op",
+            "extra": "1956 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutInt_freecache",
+            "value": 649,
+            "unit": "ns/op",
+            "extra": "1862274 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkGetInt_freecache",
+            "value": 225,
+            "unit": "ns/op",
+            "extra": "5018727 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1K_freecache",
+            "value": 958,
+            "unit": "ns/op",
+            "extra": "1266492 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1M_freecache",
+            "value": 193,
+            "unit": "ns/op",
+            "extra": "5959012 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutTinyObject_freecache",
+            "value": 1066,
+            "unit": "ns/op",
+            "extra": "1149986 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkChangeOutAllInt_freecache",
+            "value": 670050,
+            "unit": "ns/op",
+            "extra": "2194 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutInt_gcache",
+            "value": 781,
+            "unit": "ns/op",
+            "extra": "1692700 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkGetInt_gcache",
+            "value": 96.1,
+            "unit": "ns/op",
+            "extra": "13056847 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1K_gcache",
+            "value": 802,
+            "unit": "ns/op",
+            "extra": "2076117 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPut1M_gcache",
+            "value": 815,
+            "unit": "ns/op",
+            "extra": "2140890 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkPutTinyObject_gcache",
+            "value": 1141,
+            "unit": "ns/op",
+            "extra": "1040731 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkChangeOutAllInt_gcache",
+            "value": 765746,
+            "unit": "ns/op",
+            "extra": "1588 times\n2 procs"
           }
         ]
       }
