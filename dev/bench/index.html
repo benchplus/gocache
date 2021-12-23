@@ -63,13 +63,7 @@
         margin: 8px 0;
         width: 100%;
         display: flex;
-        flex-direction: column;
-      }
-      .benchmark-title {
-        font-size: 3rem;
-        font-weight: 600;
-        word-break: break-word;
-        text-align: center;
+        flex-direction: row;
       }
       .benchmark-graphs {
         display: flex;
@@ -80,7 +74,7 @@
         width: 100%;
       }
       .benchmark-chart {
-        max-width: 1000px;
+        max-width: 500px;
       }
     </style>
     <title>Benchmarks</title>
@@ -126,13 +120,23 @@
         function init() {
           function collectBenchesPerTestCase(entries) {
             const map = new Map();
+            let lastDate = 0
             for (const entry of entries) {
               const {commit, date, tool, benches} = entry;
+              if (date > lastDate || lastDate == 0) {
+                map.clear();
+                lastDate = date;
+              } else {
+                continue;
+              }
               for (const bench of benches) {
-                const result = { commit, date, tool, bench };
-                const arr = map.get(bench.name);
+                const nameVec = bench.name.replace('Benchmark','').split('_')
+                const testName = nameVec.splice(0, 1)[0]
+                const libName = nameVec.join('_')
+                const result = { libName, commit, date, tool, bench };
+                const arr = map.get(testName);
                 if (arr === undefined) {
-                  map.set(bench.name, [result]);
+                  map.set(testName, [result]);
                 } else {
                   arr.push(result);
                 }
@@ -167,30 +171,35 @@
 
         function renderAllChars(dataSets) {
 
-          function renderGraph(parent, name, dataset) {
+          function renderGraph(parent, method, dataset) {
             const canvas = document.createElement('canvas');
             canvas.className = 'benchmark-chart';
             parent.appendChild(canvas);
 
-            const color = toolColors[dataset.length > 0 ? dataset[0].tool : '_'];
+            if (dataset[0].bench.value > 10000) {
+              dataset.forEach(e => {
+                  e.bench.unit = 'ms/op';
+                  e.bench.value /= 1000.;
+              });
+            }
+
+            const color = toolColors['go'];
             const data = {
-              labels: dataset.map(d => d.commit.id.slice(0, 7)),
-              datasets: [
-                {
-                  label: name,
+              labels: dataset.map(d => d.libName),
+              datasets: [{
+                  label: method,
                   data: dataset.map(d => d.bench.value),
                   borderColor: color,
                   backgroundColor: color + '60', // Add alpha for #rrggbbaa
-                }
-              ],
+                }],
             };
+
             const options = {
               scales: {
                 xAxes: [
                   {
                     scaleLabel: {
-                      display: true,
-                      labelString: 'commit',
+                      display: false,
                     },
                   }
                 ],
@@ -198,7 +207,7 @@
                   {
                     scaleLabel: {
                       display: true,
-                      labelString: dataset.length > 0 ? dataset[0].bench.unit : '',
+                      labelString: dataset[0].bench.unit,
                     },
                     ticks: {
                       beginAtZero: true,
@@ -208,11 +217,6 @@
               },
               tooltips: {
                 callbacks: {
-                  afterTitle: items => {
-                    const {index} = items[0];
-                    const data = dataset[index];
-                    return '\n' + data.commit.message + '\n\n' + data.commit.timestamp + ' committed by @' + data.commit.committer.username + '\n';
-                  },
                   label: item => {
                     let label = item.value;
                     const { range, unit } = dataset[item.index].bench;
@@ -228,19 +232,10 @@
                   }
                 }
               },
-              onClick: (_mouseEvent, activeElems) => {
-                if (activeElems.length === 0) {
-                  return;
-                }
-                // XXX: Undocumented. How can we know the index?
-                const index = activeElems[0]._index;
-                const url = dataset[index].commit.url;
-                window.open(url, '_blank');
-              },
             };
 
             new Chart(canvas, {
-              type: 'line',
+              type: 'bar',
               data,
               options,
             });
@@ -250,11 +245,6 @@
             const setElem = document.createElement('div');
             setElem.className = 'benchmark-set';
             main.appendChild(setElem);
-
-            const nameElem = document.createElement('h1');
-            nameElem.className = 'benchmark-title';
-            nameElem.textContent = name;
-            setElem.appendChild(nameElem);
 
             const graphsElem = document.createElement('div');
             graphsElem.className = 'benchmark-graphs';

@@ -92,7 +92,7 @@ window.BENCHMARK_DATA = {
             "extra": "1508878 times\n2 procs"
           },
           {
-            "name": "BenchmarkPutChangeOutAll_cacheLRU2",
+            "name": "BenchmarkChangeOutAllInt_cacheLRU2",
             "value": 837763,
             "unit": "ns/op",
             "extra": "1641 times\n2 procs"
