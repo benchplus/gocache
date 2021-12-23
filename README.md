@@ -1,4 +1,4 @@
-# bench+ gocache
+# benchplus gocache
 
 <p align="center">
   <a href="https://github.com/benchplus/gocache/actions?query=workflow%3A%22gocache%22" alt="action status">
@@ -22,12 +22,12 @@
 
 # List of libraries
 
-- [bigcache](github.com/allegro/bigcache)
+- [bigcache](https://github.com/allegro/bigcache)
 
-- [cache](github.com/orca-zhang/cache)
+- [cache](https://github.com/orca-zhang/cache)
 
-- [freecache](github.com/coocood/freecache)
+- [freecache](https://github.com/coocood/freecache)
 
-- [gcache](github.com/bluele/gcache)
+- [gcache](https://github.com/bluele/gcache)
 
 - create a issue to add new libraries
