@@ -1,7 +1,20 @@
+# bench+ gocache
 
-[![gocache Workflow][gocache-badge]][gocache]
+<p align="center">
+  <a href="https://github.com/benchplus/gocache/actions?query=workflow%3A%22gocache%22" alt="action status">
+    <img src="https://github.com/benchplus/gocache/workflows/gocache/badge.svg"/>
+  </a>
+  <a href="https://benchplus.github.io/gocache/dev/bench/" alt="report">
+    <img src="https://img.shields.io/badge/report-click--me-brightgreen.svg?style=flat">
+  </a>
+</p>
+<p align="center">Simple performance comparison of cache libraries written in golang.</p>
 
-Simple performance comparison of cache libraries written in golang.
+
+# Reports
+
+[Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
+
 
 # Default parameters
 
@@ -17,11 +30,4 @@ Simple performance comparison of cache libraries written in golang.
 
 - [gcache](github.com/bluele/gcache)
 
-- ...
-
-# Reports
-
-[Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
-
-[gocache-badge]: https://github.com/benchplus/gocache/workflows/gocache/badge.svg
-[gocache]: https://github.com/benchplus/gocache/actions?query=workflow%3A%22gocache%22
+- create a issue to add new libraries
