@@ -104,18 +104,16 @@
       'use strict';
       (function() {
         // Colors from https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
-        const toolColors = {
-          cargo: '#dea584',
-          go: '#00add8',
-          benchmarkjs: '#f1e05a',
-          pytest: '#3572a5',
-          googlecpp: '#f34b7d',
-          catch2: '#f34b7d',
-          julia: '#a270ba',
-          customBiggerIsBetter: '#38ff38',
-          customSmallerIsBetter: '#ff3838',
-          _: '#333333'
-        };
+        const Colors = ['#dea584',
+          '#00add8',
+          '#f1e05a',
+          '#3572a5',
+          '#f34b7d',
+          '#f34b7d',
+          '#a270ba',
+          '#38ff38',
+          '#ff3838',
+          '#333333'];
 
         function init() {
           function collectBenchesPerTestCase(entries) {
@@ -183,16 +181,20 @@
               });
             }
 
-            const color = toolColors['go'];
             const data = {
-              labels: dataset.map(d => d.libName),
-              datasets: [{
-                  label: method,
-                  data: dataset.map(d => d.bench.value),
+              labels: [method],
+              datasets: [],
+            };
+
+            dataset.forEach((e, index) => {
+              const color = Colors[index%Colors.length];
+              data.datasets.push({
+                  label: e.libName,
+                  data: [e.bench.value],
                   borderColor: color,
                   backgroundColor: color + '60', // Add alpha for #rrggbbaa
-                }],
-            };
+                })
+            });
 
             const options = {
               scales: {
