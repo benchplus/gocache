@@ -9,11 +9,13 @@ Simple performance comparison of cache libraries written in golang.
 
 # List of libraries
 
-- [freecache](github.com/coocood/freecache)
-
 - [bigcache](github.com/allegro/bigcache)
 
-- [{cache}&{cache(LRU2)}](github.com/orca-zhang/cache)
+- [cache](github.com/orca-zhang/cache)
+
+- [freecache](github.com/coocood/freecache)
+
+- [gcache](github.com/bluele/gcache)
 
 - ...
 

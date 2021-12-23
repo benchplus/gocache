@@ -45,7 +45,7 @@ func BenchmarkPutTinyObject_cacheLRU2(b *testing.B) {
 	}
 }
 
-func BenchmarkPutChangeOutAll_cacheLRU2(b *testing.B) {
+func BenchmarkChangeOutAllInt_cacheLRU2(b *testing.B) {
 	cache := cache.NewLRUCache(1024, 1024, 10*time.Second).LRU2(1024)
 	for i := 0; i < b.N*1024; i++ {
 		cache.Put(fmt.Sprint(i), i)
