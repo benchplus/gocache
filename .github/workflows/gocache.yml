@@ -30,4 +30,4 @@ jobs:
           comment-on-alert: true
           fail-on-alert: true
           alert-comment-cc-users: '@orca-zhang'
-          max-items-in-chart: 20
+          max-items-in-chart: 3
