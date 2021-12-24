@@ -25,10 +25,10 @@
 
 - [bigcache](https://github.com/allegro/bigcache)
 
-- [cache](https://github.com/orca-zhang/cache)
-
 - [freecache](https://github.com/coocood/freecache)
 
 - [gcache](https://github.com/bluele/gcache)
+
+- [orcache](https://github.com/orca-zhang/orcache)
 
 - create a issue to add new libraries
