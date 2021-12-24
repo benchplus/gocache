@@ -32,7 +32,7 @@ func BenchmarkPutInt_orcache(b *testing.B) {
 
 func BenchmarkGetInt_orcache(b *testing.B) {
 	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
-	orcache.Put("0", 0)
+	cache.Put("0", 0)
 	for i := 0; i < b.N; i++ {
 		cache.Get("0")
 	}
