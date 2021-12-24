@@ -25,6 +25,8 @@
 
 - [bigcache](https://github.com/allegro/bigcache)
 
+- [cachego](https://github.com/FishGoddess/cachego)
+
 - [freecache](https://github.com/coocood/freecache)
 
 - [gcache](https://github.com/bluele/gcache)
