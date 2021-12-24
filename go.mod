@@ -7,5 +7,5 @@ require (
 	github.com/bluele/gcache v0.0.2
 	github.com/coocood/freecache v1.2.0
 	github.com/golang/protobuf v1.5.2
-	github.com/orca-zhang/cache v0.0.2
+	github.com/orca-zhang/orcache v1.0.3
 )

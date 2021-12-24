@@ -52,8 +52,8 @@ github.com/onsi/gomega v1.7.0/go.mod h1:ex+gbHU/CVuBBDIJjb2X0qEXbFg53c61hWP/1Cpa
 github.com/onsi/gomega v1.7.1/go.mod h1:XdKZgCCFLUoM/7CFJVPcG8C1xQ1AJ0vpAezJrB7JYyY=
 github.com/onsi/gomega v1.10.1/go.mod h1:iN09h71vgCQne3DLsj+A5owkum+a2tYe+TOCB1ybHNo=
 github.com/onsi/gomega v1.16.0/go.mod h1:HnhC7FXeEQY45zxNK3PPoIUhzk/80Xly9PcubAlGdZY=
-github.com/orca-zhang/cache v0.0.2 h1:b3h9qMeOBR/Ow5DXzYsewT2bQZqbWR1jmz5j7BU/IvQ=
-github.com/orca-zhang/cache v0.0.2/go.mod h1:9oxHoboATfLekV0wVOjJAxmiF/kEjfn8ubC56j+q9Rk=
+github.com/orca-zhang/orcache v1.0.3 h1:NZSpqrys8+08m6+e9VmMXEyTwIOPh3u0FccC+I3eZS0=
+github.com/orca-zhang/orcache v1.0.3/go.mod h1:sloW4tC4G7Eslm20x9XoAkiK+/YeKPRBNITvGHiwTQI=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72 h1:qLC7fQah7D6K1B0ujays3HV9gkFtllcxhzImRR7ArPQ=
