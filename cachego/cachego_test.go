@@ -90,3 +90,22 @@ func BenchmarkHeavyRead_cachego(b *testing.B) {
 
 	gocache.AddGCPause("HeavyRead")
 }
+
+func BenchmarkHeavyWrite_cachego(b *testing.B) {
+	gocache.GCPause()
+
+	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.SetWithTTL(fmt.Sprint(i), i, 10)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWrite")
+}
