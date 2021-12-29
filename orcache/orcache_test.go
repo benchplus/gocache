@@ -77,7 +77,7 @@ func BenchmarkHeavyRead_orcache(b *testing.B) {
 		cache.Put(fmt.Sprint(i), i)
 	}
 	var wg sync.WaitGroup
-	for index := 0; index < 1000000; index++ {
+	for index := 0; index < 100000; index++ {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
