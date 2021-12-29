@@ -177,9 +177,21 @@
 
             if (dataset[0].bench.value > 10000) {
               dataset.forEach(e => {
-                  e.bench.unit = 'ms/op';
+                  e.bench.unit = 'us/op';
                   e.bench.value /= 1000.;
               });
+              if (dataset[0].bench.value > 10000) {
+                dataset.forEach(e => {
+                    e.bench.unit = 'ms/op';
+                    e.bench.value /= 1000.;
+                });
+                if (dataset[0].bench.value > 10000) {
+                  dataset.forEach(e => {
+                      e.bench.unit = 's/op';
+                      e.bench.value /= 1000.;
+                  });
+                }
+              }
             }
 
             const data = {
