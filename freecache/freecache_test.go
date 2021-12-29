@@ -95,3 +95,23 @@ func BenchmarkHeavyRead_freecache(b *testing.B) {
 
 	gocache.AddGCPause("HeavyRead")
 }
+
+func BenchmarkHeavyWrite_freecache(b *testing.B) {
+	gocache.GCPause()
+
+	cache := freecache.NewCache(256 * 32 * 8)
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				v := []byte(fmt.Sprint(i))
+				cache.Set(v, v, 10)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWrite")
+}
