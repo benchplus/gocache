@@ -21,7 +21,6 @@ func TestMain(m *testing.M) {
 
 func setup() {
 	debug.SetGCPercent(10)
-	fmt.Println("GC pause for warmup: ", gocache.GCPause())
 }
 
 func shutdown() {
@@ -72,12 +71,14 @@ func BenchmarkChangeOutAllInt_orcache(b *testing.B) {
 }
 
 func BenchmarkHeavyRead_orcache(b *testing.B) {
+	gocache.GCPause()
+
 	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < 1024; i++ {
 		cache.Put(fmt.Sprint(i), i)
 	}
 	var wg sync.WaitGroup
-	for index := 0; index < 100000; index++ {
+	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {

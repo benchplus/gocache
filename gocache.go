@@ -36,6 +36,7 @@ var gcResult = make(map[string]time.Duration, 0)
 func AddGCPause(name string) {
 	pc, _, _, _ := runtime.Caller(1)
 	name = strings.Replace(runtime.FuncForPC(pc).Name(), "_", "GC_", -1)
+	name = name[strings.Index(name, "Benchmark"):]
 	if _, ok := gcResult[name]; !ok {
 		gcResult[name] = GCPause()
 	}
