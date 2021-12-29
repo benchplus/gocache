@@ -25,6 +25,7 @@ func setup() {
 }
 
 func shutdown() {
+	gocache.PrintGCPause()
 }
 
 func BenchmarkPutInt_orcache(b *testing.B) {
@@ -87,5 +88,5 @@ func BenchmarkHeavyRead_orcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	fmt.Printf("BenchmarkHeavyReadGC_orcache-8 1 %d ns/op\n", int64(gocache.GCPause()))
+	gocache.AddGCPause("HeavyRead")
 }
