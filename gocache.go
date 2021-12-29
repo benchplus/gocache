@@ -30,18 +30,16 @@ func GCPause() time.Duration {
 	return pause
 }
 
-var gcResult = make(map[string][]time.Duration, 0)
+var gcResult = make(map[string]time.Duration, 0)
 
 func AddGCPause(name string) {
-	gcResult[name] = append(gcResult[name], GCPause())
+	if _, ok := gcResult[name]; !ok {
+		gcResult[name] = GCPause()
+	}
 }
 
 func PrintGCPause() {
 	for k, v := range gcResult {
-		var sum int64 = 0
-		for _, o := range v {
-			sum += int64(o)
-		}
-		fmt.Printf("Benchmark%sGC_orcache-2 1 %f ns/op\n", k, float64(sum)/float64(len(v)))
+		fmt.Printf("Benchmark%sGC_orcache-2 1 %d ns/op\n", k, v)
 	}
 }
