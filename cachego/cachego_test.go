@@ -3,6 +3,8 @@ package benchplus
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
+	"sync"
 	"testing"
 
 	"github.com/FishGoddess/cachego"
@@ -17,9 +19,11 @@ func TestMain(m *testing.M) {
 }
 
 func setup() {
+	debug.SetGCPercent(10)
 }
 
 func shutdown() {
+	gocache.PrintGCPause()
 }
 
 func BenchmarkPutInt_cachego(b *testing.B) {
@@ -63,4 +67,26 @@ func BenchmarkChangeOutAllInt_cachego(b *testing.B) {
 	for i := 0; i < b.N*1024; i++ {
 		cache.SetWithTTL(fmt.Sprint(i), i, 10)
 	}
+}
+
+func BenchmarkHeavyRead_cachego(b *testing.B) {
+	gocache.GCPause()
+
+	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
+	for i := 0; i < 1024; i++ {
+		cache.SetWithTTL(fmt.Sprint(i), i, 10)
+	}
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.Get(fmt.Sprint(i))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyRead")
 }
