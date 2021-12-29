@@ -3,6 +3,8 @@ package benchplus
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
+	"sync"
 	"testing"
 	"time"
 
@@ -19,9 +21,11 @@ func TestMain(m *testing.M) {
 }
 
 func setup() {
+	debug.SetGCPercent(10)
 }
 
 func shutdown() {
+	gocache.PrintGCPause()
 }
 
 func BenchmarkPutInt_bigcache(b *testing.B) {
@@ -104,4 +108,33 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 		v := fmt.Sprint(i)
 		cache.Set(v, []byte(v))
 	}
+}
+
+func BenchmarkHeavyRead_bigcache(b *testing.B) {
+	gocache.GCPause()
+
+	cache, _ := bigcache.NewBigCache(bigcache.Config{
+		Shards:             256,
+		LifeWindow:         10 * time.Second,
+		MaxEntriesInWindow: 1024 * 10,
+		MaxEntrySize:       32,
+		Verbose:            false,
+	})
+	for i := 0; i < 1024; i++ {
+		v := fmt.Sprint(i)
+		cache.Set(v, []byte(v))
+	}
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.Get(fmt.Sprint(i))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyRead")
 }
