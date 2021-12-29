@@ -2,6 +2,9 @@ package gocache
 
 import (
 	"math/rand"
+	"runtime"
+	"runtime/debug"
+	"time"
 )
 
 func randomString(n int) []byte {
@@ -14,3 +17,14 @@ func randomString(n int) []byte {
 
 var Data1K = randomString(1024)
 var Data1M = randomString(1048576)
+
+var previousPause time.Duration
+
+func GCPause() time.Duration {
+	runtime.GC()
+	var stats debug.GCStats
+	debug.ReadGCStats(&stats)
+	pause := stats.PauseTotal - previousPause
+	previousPause = stats.PauseTotal
+	return pause
+}

@@ -3,6 +3,8 @@ package benchplus
 import (
 	"fmt"
 	"os"
+	"runtime/debug"
+	"sync"
 	"testing"
 	"time"
 
@@ -18,6 +20,8 @@ func TestMain(m *testing.M) {
 }
 
 func setup() {
+	debug.SetGCPercent(10)
+	fmt.Println("GC pause for warmup: ", gocache.GCPause())
 }
 
 func shutdown() {
@@ -64,4 +68,24 @@ func BenchmarkChangeOutAllInt_orcache(b *testing.B) {
 	for i := 0; i < b.N*1024; i++ {
 		cache.Put(fmt.Sprint(i), i)
 	}
+}
+
+func BenchmarkHeavyRead_orcache(b *testing.B) {
+	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+	for i := 0; i < 1024; i++ {
+		cache.Put(fmt.Sprint(i), i)
+	}
+	var wg sync.WaitGroup
+	for index := 0; index < 1024; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.Get(fmt.Sprint(i))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	fmt.Printf("BenchmarkHeavyReadGC_orcache-8 1 %d ns/op\n", int64(gocache.GCPause()))
 }
