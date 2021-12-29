@@ -92,3 +92,22 @@ func BenchmarkHeavyRead_gcache(b *testing.B) {
 
 	gocache.AddGCPause("HeavyRead")
 }
+
+func BenchmarkHeavyWrite_gcache(b *testing.B) {
+	gocache.GCPause()
+
+	cache := gcache.New(256 * 32).LRU().Build()
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.Set(i, i)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWrite")
+}
