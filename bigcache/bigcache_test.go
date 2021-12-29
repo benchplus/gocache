@@ -138,3 +138,32 @@ func BenchmarkHeavyRead_bigcache(b *testing.B) {
 
 	gocache.AddGCPause("HeavyRead")
 }
+
+func BenchmarkHeavyWrite_bigcache(b *testing.B) {
+	gocache.GCPause()
+
+	cache, _ := bigcache.NewBigCache(bigcache.Config{
+		Shards:             256,
+		LifeWindow:         10 * time.Second,
+		MaxEntriesInWindow: 1024 * 10,
+		MaxEntrySize:       32,
+		Verbose:            false,
+	})
+	for i := 0; i < 1024; i++ {
+		v := fmt.Sprint(i)
+		cache.Set(v, []byte(v))
+	}
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.Get(fmt.Sprint(i))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWrite")
+}
