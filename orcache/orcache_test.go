@@ -91,3 +91,22 @@ func BenchmarkHeavyRead_orcache(b *testing.B) {
 
 	gocache.AddGCPause("HeavyRead")
 }
+
+func BenchmarkHeavyWrite_orcache(b *testing.B) {
+	gocache.GCPause()
+
+	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				cache.Put(fmt.Sprint(i), i)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWrite")
+}
