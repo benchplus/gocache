@@ -21,6 +21,8 @@
 
 - `gcache` is 256 shards as default
 
+- set `value` as `key+1` when `int` cases
+
 # Libraries
 
 - [bigcache](https://github.com/allegro/bigcache)
