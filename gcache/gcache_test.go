@@ -30,7 +30,7 @@ func shutdown() {
 func BenchmarkPutInt_gcache(b *testing.B) {
 	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N; i++ {
-		cache.Set(i, i)
+		cache.Set(i, i+1)
 	}
 }
 
@@ -67,7 +67,7 @@ func BenchmarkPutTinyObject_gcache(b *testing.B) {
 func BenchmarkChangeOutAllInt_gcache(b *testing.B) {
 	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N*1024; i++ {
-		cache.Set(i, i)
+		cache.Set(i, i+1)
 	}
 }
 
@@ -76,7 +76,7 @@ func BenchmarkHeavyRead_gcache(b *testing.B) {
 
 	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < 1024; i++ {
-		cache.Set(i, i)
+		cache.Set(i, i+1)
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
@@ -102,7 +102,7 @@ func BenchmarkHeavyWrite_gcache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 10240; i++ {
-				cache.Set(i, i)
+				cache.Set(i, i+1)
 			}
 			wg.Done()
 		}()
