@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/benchplus/gocache"
-	"github.com/orca-zhang/orcache"
+	"github.com/orca-zhang/ecache"
 )
 
 func TestMain(m *testing.M) {
@@ -27,53 +27,53 @@ func shutdown() {
 	gocache.PrintGCPause()
 }
 
-func BenchmarkPutInt_orcache(b *testing.B) {
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+func BenchmarkPutInt_ecacheLRU2(b *testing.B) {
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
 		cache.Put(fmt.Sprint(i), i)
 	}
 }
 
-func BenchmarkGetInt_orcache(b *testing.B) {
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+func BenchmarkGetInt_ecacheLRU2(b *testing.B) {
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	cache.Put("0", 0)
 	for i := 0; i < b.N; i++ {
 		cache.Get("0")
 	}
 }
 
-func BenchmarkPut1K_orcache(b *testing.B) {
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+func BenchmarkPut1K_ecacheLRU2(b *testing.B) {
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
 		cache.Put(fmt.Sprint(i), gocache.Data1K)
 	}
 }
 
-func BenchmarkPut1M_orcache(b *testing.B) {
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+func BenchmarkPut1M_ecacheLRU2(b *testing.B) {
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
 		cache.Put(fmt.Sprint(i), gocache.Data1M)
 	}
 }
 
-func BenchmarkPutTinyObject_orcache(b *testing.B) {
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+func BenchmarkPutTinyObject_ecacheLRU2(b *testing.B) {
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
 		cache.Put(fmt.Sprint(i), gocache.UserInfo{})
 	}
 }
 
-func BenchmarkChangeOutAllInt_orcache(b *testing.B) {
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+func BenchmarkChangeOutAllInt_ecacheLRU2(b *testing.B) {
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N*1024; i++ {
 		cache.Put(fmt.Sprint(i), i)
 	}
 }
 
-func BenchmarkHeavyRead_orcache(b *testing.B) {
+func BenchmarkHeavyRead_ecacheLRU2(b *testing.B) {
 	gocache.GCPause()
 
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < 1024; i++ {
 		cache.Put(fmt.Sprint(i), i)
 	}
@@ -92,10 +92,10 @@ func BenchmarkHeavyRead_orcache(b *testing.B) {
 	gocache.AddGCPause("HeavyRead")
 }
 
-func BenchmarkHeavyWrite_orcache(b *testing.B) {
+func BenchmarkHeavyWrite_ecacheLRU2(b *testing.B) {
 	gocache.GCPause()
 
-	cache := orcache.NewLRUCache(256, 32, 10*time.Second)
+	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
