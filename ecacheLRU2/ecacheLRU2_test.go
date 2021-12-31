@@ -30,13 +30,13 @@ func shutdown() {
 func BenchmarkPutInt_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 10, 10*time.Second).LRU2(22)
 	for i := 0; i < b.N; i++ {
-		cache.Put(fmt.Sprint(i), i)
+		cache.Put(fmt.Sprint(i), i+1)
 	}
 }
 
 func BenchmarkGetInt_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 10, 10*time.Second).LRU2(22)
-	cache.Put("0", 0)
+	cache.Put("0", 1)
 	for i := 0; i < b.N; i++ {
 		cache.Get("0")
 	}
@@ -75,7 +75,7 @@ func BenchmarkHeavyRead_ecacheLRU2(b *testing.B) {
 
 	cache := ecache.NewLRUCache(256, 10, 10*time.Second).LRU2(22)
 	for i := 0; i < 1024; i++ {
-		cache.Put(fmt.Sprint(i), i)
+		cache.Put(fmt.Sprint(i), i+1)
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
@@ -101,7 +101,7 @@ func BenchmarkHeavyWrite_ecacheLRU2(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 10240; i++ {
-				cache.Put(fmt.Sprint(i), i)
+				cache.Put(fmt.Sprint(i), i+1)
 			}
 			wg.Done()
 		}()
