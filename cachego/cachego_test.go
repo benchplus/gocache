@@ -99,7 +99,7 @@ func BenchmarkHeavyWrite_cachego(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 1024; i++ {
+			for i := 0; i < 10240; i++ {
 				cache.SetWithTTL(fmt.Sprint(i), i, 10)
 			}
 			wg.Done()
