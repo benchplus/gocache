@@ -100,7 +100,7 @@ func BenchmarkHeavyWrite_ecacheLRU2(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 1024; i++ {
+			for i := 0; i < 10240; i++ {
 				cache.Put(fmt.Sprint(i), i)
 			}
 			wg.Done()
