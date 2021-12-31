@@ -131,7 +131,7 @@
               for (const bench of benches) {
                 const nameVec = bench.name.replace('Benchmark','').split('_')
                 const testName = nameVec.splice(0, 1)[0]
-                const libName = nameVec.join('_').replace('orcacheLRU2','orcache(LRU2)')
+                const libName = nameVec.join('_').replace('ecacheLRU2','ecache(LRU2)')
                 const result = { libName, commit, date, tool, bench };
                 const arr = map.get(testName);
                 if (arr === undefined) {
