@@ -29,13 +29,13 @@ func shutdown() {
 func BenchmarkPutInt_cachego(b *testing.B) {
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
 	for i := 0; i < b.N; i++ {
-		cache.SetWithTTL(fmt.Sprint(i), i, 10)
+		cache.SetWithTTL(fmt.Sprint(i), i+1, 10)
 	}
 }
 
 func BenchmarkGetInt_cachego(b *testing.B) {
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
-	cache.SetWithTTL("0", 0, 10)
+	cache.SetWithTTL("0", 1, 10)
 	for i := 0; i < b.N; i++ {
 		cache.Get("0")
 	}
@@ -65,7 +65,7 @@ func BenchmarkPutTinyObject_cachego(b *testing.B) {
 func BenchmarkChangeOutAllInt_cachego(b *testing.B) {
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
 	for i := 0; i < b.N*1024; i++ {
-		cache.SetWithTTL(fmt.Sprint(i), i, 10)
+		cache.SetWithTTL(fmt.Sprint(i), i+1, 10)
 	}
 }
 
@@ -74,7 +74,7 @@ func BenchmarkHeavyRead_cachego(b *testing.B) {
 
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
 	for i := 0; i < 1024; i++ {
-		cache.SetWithTTL(fmt.Sprint(i), i, 10)
+		cache.SetWithTTL(fmt.Sprint(i), i+1, 10)
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
@@ -100,7 +100,7 @@ func BenchmarkHeavyWrite_cachego(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 10240; i++ {
-				cache.SetWithTTL(fmt.Sprint(i), i, 10)
+				cache.SetWithTTL(fmt.Sprint(i), i+1, 10)
 			}
 			wg.Done()
 		}()
