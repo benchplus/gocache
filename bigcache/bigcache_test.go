@@ -149,16 +149,13 @@ func BenchmarkHeavyWrite_bigcache(b *testing.B) {
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
-	for i := 0; i < 1024; i++ {
-		v := fmt.Sprint(i)
-		cache.Set(v, []byte(v))
-	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 1024; i++ {
-				cache.Get(fmt.Sprint(i))
+			for i := 0; i < 10240; i++ {
+				v := fmt.Sprint(i)
+				cache.Set(v, []byte(v))
 			}
 			wg.Done()
 		}()
