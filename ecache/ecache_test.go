@@ -30,7 +30,7 @@ func shutdown() {
 func BenchmarkPutInt_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < b.N; i++ {
-		cache.Put(fmt.Sprint(i), i+1)
+		cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
 	}
 }
 
@@ -38,7 +38,7 @@ func BenchmarkGetInt_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	cache.Put("0", 1)
 	for i := 0; i < b.N; i++ {
-		cache.Get("0")
+		cache.GetV("0")
 	}
 }
 
@@ -66,7 +66,7 @@ func BenchmarkPutTinyObject_ecache(b *testing.B) {
 func BenchmarkChangeOutAllInt_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < b.N*1024; i++ {
-		cache.Put(fmt.Sprint(i), i+1)
+		cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
 	}
 }
 
