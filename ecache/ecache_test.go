@@ -82,7 +82,7 @@ func BenchmarkHeavyRead_ecache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
-				cache.Get(fmt.Sprint(i))
+				cache.GetV(fmt.Sprint(i))
 			}
 			wg.Done()
 		}()
@@ -101,7 +101,7 @@ func BenchmarkHeavyWrite_ecache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 10240; i++ {
-				cache.Put(fmt.Sprint(i), i+1)
+				cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
 			}
 			wg.Done()
 		}()
