@@ -71,7 +71,7 @@ func BenchmarkChangeOutAllInt_freecache(b *testing.B) {
 	}
 }
 
-func BenchmarkHeavyRead_freecache(b *testing.B) {
+func BenchmarkHeavyReadInt_freecache(b *testing.B) {
 	gocache.GCPause()
 
 	cache := freecache.NewCache(256 * 32 * 8)
@@ -90,10 +90,10 @@ func BenchmarkHeavyRead_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyRead")
+	gocache.AddGCPause("HeavyReadInt")
 }
 
-func BenchmarkHeavyWrite_freecache(b *testing.B) {
+func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
 	gocache.GCPause()
 
 	cache := freecache.NewCache(256 * 32 * 8)
@@ -109,5 +109,5 @@ func BenchmarkHeavyWrite_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite")
+	gocache.AddGCPause("HeavyWriteInt")
 }
