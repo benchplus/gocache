@@ -71,7 +71,7 @@ func BenchmarkChangeOutAllInt_gcache(b *testing.B) {
 	}
 }
 
-func BenchmarkHeavyRead_gcache(b *testing.B) {
+func BenchmarkHeavyReadInt_gcache(b *testing.B) {
 	gocache.GCPause()
 
 	cache := gcache.New(256 * 32).LRU().Build()
@@ -90,10 +90,10 @@ func BenchmarkHeavyRead_gcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyRead")
+	gocache.AddGCPause("HeavyReadInt")
 }
 
-func BenchmarkHeavyWrite_gcache(b *testing.B) {
+func BenchmarkHeavyWriteInt_gcache(b *testing.B) {
 	gocache.GCPause()
 
 	cache := gcache.New(256 * 32).LRU().Build()
@@ -109,5 +109,5 @@ func BenchmarkHeavyWrite_gcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite")
+	gocache.AddGCPause("HeavyWriteInt")
 }
