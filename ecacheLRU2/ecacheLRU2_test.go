@@ -70,7 +70,7 @@ func BenchmarkChangeOutAllInt_ecacheLRU2(b *testing.B) {
 	}
 }
 
-func BenchmarkHeavyRead_ecacheLRU2(b *testing.B) {
+func BenchmarkHeavyReadInt_ecacheLRU2(b *testing.B) {
 	gocache.GCPause()
 
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
@@ -89,10 +89,10 @@ func BenchmarkHeavyRead_ecacheLRU2(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyRead")
+	gocache.AddGCPause("HeavyReadInt")
 }
 
-func BenchmarkHeavyWrite_ecacheLRU2(b *testing.B) {
+func BenchmarkHeavyWriteInt_ecacheLRU2(b *testing.B) {
 	gocache.GCPause()
 
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
@@ -108,5 +108,5 @@ func BenchmarkHeavyWrite_ecacheLRU2(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite")
+	gocache.AddGCPause("HeavyWriteInt")
 }
