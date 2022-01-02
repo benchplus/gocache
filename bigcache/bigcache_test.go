@@ -32,7 +32,7 @@ func BenchmarkPutInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -45,7 +45,7 @@ func BenchmarkGetInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -59,7 +59,7 @@ func BenchmarkPut1K_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -72,7 +72,7 @@ func BenchmarkPut1M_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -85,7 +85,7 @@ func BenchmarkPutTinyObject_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -99,7 +99,7 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -114,7 +114,7 @@ func BenchmarkHeavyRead_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -142,7 +142,7 @@ func BenchmarkHeavyWrite_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 1024 * 10,
+		MaxEntriesInWindow: 256 * 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
