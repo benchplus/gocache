@@ -69,7 +69,7 @@ func BenchmarkChangeOutAllInt_cachego(b *testing.B) {
 	}
 }
 
-func BenchmarkHeavyRead_cachego(b *testing.B) {
+func BenchmarkHeavyReadInt_cachego(b *testing.B) {
 	gocache.GCPause()
 
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
@@ -88,10 +88,10 @@ func BenchmarkHeavyRead_cachego(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyRead")
+	gocache.AddGCPause("HeavyReadInt")
 }
 
-func BenchmarkHeavyWrite_cachego(b *testing.B) {
+func BenchmarkHeavyWriteInt_cachego(b *testing.B) {
 	gocache.GCPause()
 
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
@@ -107,5 +107,5 @@ func BenchmarkHeavyWrite_cachego(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite")
+	gocache.AddGCPause("HeavyWriteInt")
 }
