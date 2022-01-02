@@ -32,7 +32,7 @@ func BenchmarkPutInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
+		MaxEntriesInWindow: 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -45,7 +45,7 @@ func BenchmarkGetInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
+		MaxEntriesInWindow: 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -59,8 +59,8 @@ func BenchmarkPut1K_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
-		MaxEntrySize:       32,
+		MaxEntriesInWindow: 32,
+		MaxEntrySize:       1024,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -72,8 +72,8 @@ func BenchmarkPut1M_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
-		MaxEntrySize:       32,
+		MaxEntriesInWindow: 32,
+		MaxEntrySize:       1048576,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -85,7 +85,7 @@ func BenchmarkPutTinyObject_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
+		MaxEntriesInWindow: 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -99,7 +99,7 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
+		MaxEntriesInWindow: 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -108,13 +108,13 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 	}
 }
 
-func BenchmarkHeavyRead_bigcache(b *testing.B) {
+func BenchmarkHeavyReadInt_bigcache(b *testing.B) {
 	gocache.GCPause()
 
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
+		MaxEntriesInWindow: 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -133,16 +133,16 @@ func BenchmarkHeavyRead_bigcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyRead")
+	gocache.AddGCPause("HeavyReadInt")
 }
 
-func BenchmarkHeavyWrite_bigcache(b *testing.B) {
+func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 	gocache.GCPause()
 
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 256 * 32,
+		MaxEntriesInWindow: 32,
 		MaxEntrySize:       32,
 		Verbose:            false,
 	})
@@ -158,5 +158,5 @@ func BenchmarkHeavyWrite_bigcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite")
+	gocache.AddGCPause("HeavyWriteInt")
 }
