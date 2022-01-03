@@ -99,7 +99,7 @@ func BenchmarkHeavyWriteInt_cachego(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 10240; i++ {
+			for i := 0; i < 8192; i++ {
 				cache.SetWithTTL(fmt.Sprint(i), i+1, 10)
 			}
 			wg.Done()
@@ -108,4 +108,23 @@ func BenchmarkHeavyWriteInt_cachego(b *testing.B) {
 	wg.Wait()
 
 	gocache.AddGCPause("HeavyWriteInt")
+}
+
+func BenchmarkHeavyWriteIntFull_cachego(b *testing.B) {
+	gocache.GCPause()
+
+	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 10240; i++ {
+				cache.SetWithTTL(fmt.Sprint(i), i+1, 10)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWriteIntFull")
 }
