@@ -101,7 +101,7 @@ func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 10240; i++ {
+			for i := 0; i < 8192; i++ {
 				cache.Set([]byte(fmt.Sprint(i)), []byte(fmt.Sprint(i+1)), 10)
 			}
 			wg.Done()
@@ -120,7 +120,7 @@ func BenchmarkHeavyWrite1K_freecache(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 10240; i++ {
+			for i := 0; i < 8192; i++ {
 				cache.Set([]byte(fmt.Sprint(i)), gocache.Data1K, 10)
 			}
 			wg.Done()
