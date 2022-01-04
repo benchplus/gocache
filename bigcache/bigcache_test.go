@@ -150,7 +150,7 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 8192; i++ {
+			for i := 0; i < 1024; i++ {
 				cache.Set(fmt.Sprint(i), []byte(fmt.Sprint(i+1)))
 			}
 			wg.Done()
@@ -161,27 +161,27 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 	gocache.AddGCPause("HeavyWriteInt")
 }
 
-func BenchmarkHeavyWriteIntFull_bigcache(b *testing.B) {
+func BenchmarkHeavyWrite1K_bigcache(b *testing.B) {
 	gocache.GCPause()
 
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       1024,
 		Verbose:            false,
 	})
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 10240; i++ {
-				cache.Set(fmt.Sprint(i), []byte(fmt.Sprint(i+1)))
+			for i := 0; i < 1024; i++ {
+				cache.Set(fmt.Sprint(i), gocache.Data1K)
 			}
 			wg.Done()
 		}()
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWriteIntFull")
+	gocache.AddGCPause("HeavyWrite1K")
 }

@@ -100,7 +100,7 @@ func BenchmarkHeavyWriteInt_ecache(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 8192; i++ {
+			for i := 0; i < 1024; i++ {
 				cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
 			}
 			wg.Done()
@@ -111,7 +111,7 @@ func BenchmarkHeavyWriteInt_ecache(b *testing.B) {
 	gocache.AddGCPause("HeavyWriteInt")
 }
 
-func BenchmarkHeavyWriteIntFull_ecache(b *testing.B) {
+func BenchmarkHeavyWrite1K_ecache(b *testing.B) {
 	gocache.GCPause()
 
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
@@ -119,13 +119,13 @@ func BenchmarkHeavyWriteIntFull_ecache(b *testing.B) {
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
-			for i := 0; i < 10240; i++ {
-				cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
+			for i := 0; i < 1024; i++ {
+				cache.Put(fmt.Sprint(i), gocache.Data1K)
 			}
 			wg.Done()
 		}()
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWriteIntFull")
+	gocache.AddGCPause("HeavyWrite1K")
 }
