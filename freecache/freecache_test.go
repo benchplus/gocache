@@ -130,7 +130,5 @@ func BenchmarkHeavyWrite1K_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	fmt.Println(cache.EntryCount(), cache.OverwriteCount())
-
 	gocache.AddGCPause("HeavyWrite1K")
 }
