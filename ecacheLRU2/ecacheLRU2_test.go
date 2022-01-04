@@ -98,10 +98,11 @@ func BenchmarkHeavyWriteInt_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
+		start := index
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
+				cache.PutV(fmt.Sprint(i+start), cache.I(int64(i+1)))
 			}
 			wg.Done()
 		}()
@@ -117,10 +118,11 @@ func BenchmarkHeavyWrite1K_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
+		start := index
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.PutV(fmt.Sprint(i), cache.V(gocache.Data1K))
+				cache.PutV(fmt.Sprint(i+start), cache.V(gocache.Data1K))
 			}
 			wg.Done()
 		}()
