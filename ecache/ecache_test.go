@@ -120,7 +120,7 @@ func BenchmarkHeavyWrite1K_ecache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.Put(fmt.Sprint(i), gocache.Data1K)
+				cache.PutV(fmt.Sprint(i), cache.V(gocache.Data1K))
 			}
 			wg.Done()
 		}()
