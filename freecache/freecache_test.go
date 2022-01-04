@@ -115,7 +115,7 @@ func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
 func BenchmarkHeavyWrite1K_freecache(b *testing.B) {
 	gocache.GCPause()
 
-	cache := freecache.NewCache(256 * 32 * 8)
+	cache := freecache.NewCache(256 * 32 * 1024)
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
