@@ -8,6 +8,6 @@ require (
 	github.com/bluele/gcache v0.0.2
 	github.com/coocood/freecache v1.2.0
 	github.com/golang/protobuf v1.5.2
-	github.com/orca-zhang/ecache v1.0.6-0.20220105090351-c30cdb0e39cd
+	github.com/orca-zhang/ecache v1.0.6-0.20220105092400-3126a397e571
 	github.com/stretchr/testify v1.7.0 // indirect
 )

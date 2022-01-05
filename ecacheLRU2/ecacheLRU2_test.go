@@ -36,9 +36,9 @@ func BenchmarkPutInt_ecacheLRU2(b *testing.B) {
 
 func BenchmarkGetInt_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
-	cache.Put("0", 1)
+	cache.PutV("0", cache.D(int64(1)))
 	for i := 0; i < b.N; i++ {
-		cache.Get("0")
+		cache.GetV("0")
 	}
 }
 
@@ -52,7 +52,7 @@ func BenchmarkPut1K_ecacheLRU2(b *testing.B) {
 func BenchmarkGetIntMiss_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
-		cache.Get(fmt.Sprint(i))
+		cache.GetV(fmt.Sprint(i))
 	}
 }
 
@@ -82,7 +82,7 @@ func BenchmarkHeavyReadInt_ecacheLRU2(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
-				cache.Get(fmt.Sprint(i))
+				cache.GetV(fmt.Sprint(i))
 			}
 			wg.Done()
 		}()
