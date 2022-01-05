@@ -68,16 +68,16 @@ func BenchmarkPut1K_bigcache(b *testing.B) {
 	}
 }
 
-func BenchmarkPut1M_bigcache(b *testing.B) {
+func BenchmarkGetIntMiss_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       1048576,
+		MaxEntrySize:       21,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
-		cache.Set(fmt.Sprint(i), gocache.Data1M)
+		cache.Get(fmt.Sprint(i))
 	}
 }
 
@@ -123,11 +123,10 @@ func BenchmarkHeavyReadInt_bigcache(b *testing.B) {
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
-		start := index
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
-				cache.Get(fmt.Sprint(i + start))
+				cache.Get(fmt.Sprint(i))
 			}
 			wg.Done()
 		}()

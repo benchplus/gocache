@@ -49,10 +49,10 @@ func BenchmarkPut1K_gcache(b *testing.B) {
 	}
 }
 
-func BenchmarkPut1M_gcache(b *testing.B) {
+func BenchmarkGetIntMiss_gcache(b *testing.B) {
 	cache := gcache.New(256 * 32).LRU().Build()
 	for i := 0; i < b.N; i++ {
-		cache.Set(i, gocache.Data1M)
+		cache.Get(fmt.Sprint(i))
 	}
 }
 
