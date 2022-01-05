@@ -30,7 +30,7 @@ func shutdown() {
 func BenchmarkPutInt_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
-		cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
+		cache.PutV(fmt.Sprint(i), cache.D(int64(i+1)))
 	}
 }
 
@@ -66,7 +66,7 @@ func BenchmarkPutTinyObject_ecacheLRU2(b *testing.B) {
 func BenchmarkChangeOutAllInt_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N*1024; i++ {
-		cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
+		cache.PutV(fmt.Sprint(i), cache.D(int64(i+1)))
 	}
 }
 
@@ -75,7 +75,7 @@ func BenchmarkHeavyReadInt_ecacheLRU2(b *testing.B) {
 
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < 1024; i++ {
-		cache.PutV(fmt.Sprint(i), cache.I(int64(i+1)))
+		cache.PutV(fmt.Sprint(i), cache.D(int64(i+1)))
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
@@ -102,7 +102,7 @@ func BenchmarkHeavyWriteInt_ecacheLRU2(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.PutV(fmt.Sprint(i+start), cache.I(int64(i+1)))
+				cache.PutV(fmt.Sprint(i+start), cache.D(int64(i+1)))
 			}
 			wg.Done()
 		}()
