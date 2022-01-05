@@ -162,6 +162,7 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 	gocache.AddGCPause("HeavyWriteInt")
 }
 
+/* ran too long, comment-out
 func BenchmarkHeavyWrite1K_bigcache(b *testing.B) {
 	gocache.GCPause()
 
@@ -186,3 +187,4 @@ func BenchmarkHeavyWrite1K_bigcache(b *testing.B) {
 
 	gocache.AddGCPause("HeavyWrite1K")
 }
+*/
