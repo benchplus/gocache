@@ -79,7 +79,7 @@ func BenchmarkHeavyReadInt_gcache(b *testing.B) {
 		cache.Set(i, i+1)
 	}
 	var wg sync.WaitGroup
-	for index := 0; index < 10000; index++ {
+	for index := 0; index < 1000; index++ {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
@@ -98,7 +98,7 @@ func BenchmarkHeavyWriteInt_gcache(b *testing.B) {
 
 	cache := gcache.New(256 * 32).LRU().Build()
 	var wg sync.WaitGroup
-	for index := 0; index < 10000; index++ {
+	for index := 0; index < 1000; index++ {
 		start := index
 		wg.Add(1)
 		go func() {
@@ -118,7 +118,7 @@ func BenchmarkHeavyWrite1K_gcache(b *testing.B) {
 
 	cache := gcache.New(256 * 32).LRU().Build()
 	var wg sync.WaitGroup
-	for index := 0; index < 10000; index++ {
+	for index := 0; index < 1000; index++ {
 		start := index
 		wg.Add(1)
 		go func() {
