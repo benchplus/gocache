@@ -30,7 +30,7 @@ func shutdown() {
 func BenchmarkPutInt_freecache(b *testing.B) {
 	cache := freecache.NewCache(256 * 32 * 8)
 	for i := 0; i < b.N; i++ {
-		cache.Set([]byte(fmt.Sprint(i)), []byte(fmt.Sprint(i+1)), 10)
+		cache.Set([]byte(fmt.Sprint(i)), gocache.D(int64(i+1)), 10)
 	}
 }
 
@@ -67,7 +67,7 @@ func BenchmarkPutTinyObject_freecache(b *testing.B) {
 func BenchmarkChangeOutAllInt_freecache(b *testing.B) {
 	cache := freecache.NewCache(256 * 32 * 8)
 	for i := 0; i < b.N*1024; i++ {
-		cache.Set([]byte(fmt.Sprint(i)), []byte(fmt.Sprint(i+1)), 10)
+		cache.Set([]byte(fmt.Sprint(i)), gocache.D(int64(i+1)), 10)
 	}
 }
 
@@ -76,7 +76,7 @@ func BenchmarkHeavyReadInt_freecache(b *testing.B) {
 
 	cache := freecache.NewCache(256 * 32 * 8)
 	for i := 0; i < 1024; i++ {
-		cache.Set([]byte(fmt.Sprint(i)), []byte(fmt.Sprint(i+1)), 10)
+		cache.Set([]byte(fmt.Sprint(i)), gocache.D(int64(i+1)), 10)
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
@@ -103,7 +103,7 @@ func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.Set([]byte(fmt.Sprint(i+start)), []byte(fmt.Sprint(i+1)), 10)
+				cache.Set([]byte(fmt.Sprint(i+start)), gocache.D(int64(i+1)), 10)
 			}
 			wg.Done()
 		}()

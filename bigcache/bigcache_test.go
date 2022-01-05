@@ -37,7 +37,7 @@ func BenchmarkPutInt_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
-		cache.Set(fmt.Sprint(i), []byte(fmt.Sprint(i+1)))
+		cache.Set(fmt.Sprint(i), gocache.D(int64(i+1)))
 	}
 }
 
@@ -104,7 +104,7 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < b.N*1024; i++ {
-		cache.Set(fmt.Sprint(i), []byte(fmt.Sprint(i+1)))
+		cache.Set(fmt.Sprint(i), gocache.D(int64(i+1)))
 	}
 }
 
@@ -119,7 +119,7 @@ func BenchmarkHeavyReadInt_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < 1024; i++ {
-		cache.Set(fmt.Sprint(i), []byte(fmt.Sprint(i+1)))
+		cache.Set(fmt.Sprint(i), gocache.D(int64(i+1)))
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
@@ -152,7 +152,7 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.Set(fmt.Sprint(i+start), []byte(fmt.Sprint(i+1)))
+				cache.Set(fmt.Sprint(i+start), gocache.D(int64(i+1)))
 			}
 			wg.Done()
 		}()

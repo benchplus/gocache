@@ -1,6 +1,7 @@
 package gocache
 
 import (
+	"encoding/binary"
 	"fmt"
 	"math/rand"
 	"runtime"
@@ -8,6 +9,12 @@ import (
 	"strings"
 	"time"
 )
+
+func D(d int64) []byte {
+	var data [8]byte
+	binary.LittleEndian.PutUint64(data[:], uint64(d))
+	return data[:]
+}
 
 func randomString(n int) []byte {
 	b := make([]byte, n)
