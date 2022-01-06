@@ -21,6 +21,7 @@
       <td><a href="https://github.com/orca-zhang/ecache"><strong>ecache</strong></a></td>
       <td><a href="https://github.com/coocood/freecache"><strong>freecache</strong></a></td>
       <td><a href="https://github.com/bluele/gcache"><strong>gcache</strong></a></td>
+      <td><a href="https://github.com/patrickmn/go-cache"><strong>go-cache</strong></a></td>
    </tr>
    <tr>
       <td>PutInt</td>

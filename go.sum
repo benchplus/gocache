@@ -100,6 +100,9 @@ github.com/orca-zhang/ecache v1.0.6-0.20220106024048-c5cbc8da27ae h1:Ar6qUnMpj/5
 github.com/orca-zhang/ecache v1.0.6-0.20220106024048-c5cbc8da27ae/go.mod h1:+rafQ9Iye+aFqWoQHDLrfCtAH5TJYfvUUZ7dm72bFgw=
 github.com/orca-zhang/ecache v1.0.6-0.20220106092051-fafe67966da5 h1:WfDtjlJh2/pc0bGKJKrQ7EkDygV1tsg9xdknrA8iq2k=
 github.com/orca-zhang/ecache v1.0.6-0.20220106092051-fafe67966da5/go.mod h1:+rafQ9Iye+aFqWoQHDLrfCtAH5TJYfvUUZ7dm72bFgw=
+github.com/patrickmn/go-cache v1.0.0 h1:3gD5McaYs9CxjyK5AXGcq8gdeCARtd/9gJDUvVeaZ0Y=
+github.com/patrickmn/go-cache v2.1.0+incompatible h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc=
+github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/spaolacci/murmur3 v0.0.0-20180118202830-f09979ecbc72 h1:qLC7fQah7D6K1B0ujays3HV9gkFtllcxhzImRR7ArPQ=
