@@ -50,7 +50,7 @@ func BenchmarkPut1K_freecache(b *testing.B) {
 }
 
 func BenchmarkPut1M_freecache(b *testing.B) {
-	cache := freecache.NewCache(256 * 32 * 1024)
+	cache := freecache.NewCache(256 * 32 * 1048576)
 	for i := 0; i < b.N; i++ {
 		cache.Set([]byte(fmt.Sprint(i)), gocache.Data1M, 10)
 	}
