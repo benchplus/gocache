@@ -47,6 +47,14 @@
       <td>:airplane:</td>
    </tr>
    <tr>
+      <td>Put1M</td>
+      <td>:x:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:x:</td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
       <td>PutTinyObject</td>
       <td>:airplane:</td>
       <td></td>
@@ -112,7 +120,7 @@
    </tr>
 </table>
 
-> `:airplane:` for fast, `:rocket:` for faster.
+> :airplane: for fast, :rocket: for faster.
 
 # Default parameters
 
