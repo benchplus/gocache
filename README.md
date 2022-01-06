@@ -88,12 +88,12 @@
    </tr>
    <tr>
       <td>HeavyReadIntGC</td>
-      <td>:airplane:</td>
-      <td>:rocket:</td>
+      <td></td>
       <td>:rocket:</td>
       <td>:rocket:</td>
       <td></td>
-      <td>:rocket:</td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
    </tr>
    <tr>
       <td>HeavyWriteInt</td>
@@ -102,6 +102,7 @@
       <td>:rocket:</td>
       <td>:airplane:</td>
       <td></td>
+      <td>:rocket:</td>
    </tr>
    <tr>
       <td>HeavyWriteIntGC</td>
@@ -110,7 +111,7 @@
       <td>:airplane:</td>
       <td>:airplane:</td>
       <td></td>
-      <td>:airplane:</td>
+      <td>:rocket:</td>
    </tr>
    <tr>
       <td>HeavyWrite1K</td>
