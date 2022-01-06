@@ -68,16 +68,16 @@ func BenchmarkPut1K_bigcache(b *testing.B) {
 	}
 }
 
-func BenchmarkGetIntMiss_bigcache(b *testing.B) {
+func BenchmarkPut1M_bigcache(b *testing.B) {
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       21,
+		MaxEntrySize:       1048576,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
-		cache.Get(fmt.Sprint(i))
+		cache.Set(fmt.Sprint(i), gocache.Data1M)
 	}
 }
 

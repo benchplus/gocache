@@ -49,10 +49,10 @@ func BenchmarkPut1K_ecacheLRU2(b *testing.B) {
 	}
 }
 
-func BenchmarkGetIntMiss_ecacheLRU2(b *testing.B) {
+func BenchmarkPut1M_ecacheLRU2(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 16, 10*time.Second).LRU2(16)
 	for i := 0; i < b.N; i++ {
-		cache.GetInt64(fmt.Sprint(i))
+		cache.PutBytes(fmt.Sprint(i), gocache.Data1M)
 	}
 }
 

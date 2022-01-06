@@ -11,18 +11,16 @@
 
 # Reports
 
-[Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
-
-
+- [Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
 
 <table style="text-align: center">
    <tr>
-      <td>case</td>
-      <td>bigcache</td>
-      <td>cachego</td>
-      <td>ecache</td>
-      <td>freecache</td>
-      <td>gcache</td>
+      <td></td>
+      <td><a href="https://github.com/allegro/bigcache"><strong>bigcache</strong></a></td>
+      <td><a href="https://github.com/FishGoddess/cachego"><strong>cachego</strong></a></td>
+      <td><a href="https://github.com/orca-zhang/ecache"><strong>ecache</strong></a></td>
+      <td><a href="https://github.com/coocood/freecache"><strong>freecache</strong></a></td>
+      <td><a href="https://github.com/bluele/gcache"><strong>gcache</strong></a></td>
    </tr>
    <tr>
       <td>PutInt</td>
@@ -114,6 +112,7 @@
    </tr>
 </table>
 
+> `:airplane:` for fast, `:rocket:` for faster.
 
 # Default parameters
 
@@ -123,18 +122,6 @@
 
 - set `value` as `key+1` when `int` cases
 
-# Libraries
-
-- [bigcache](https://github.com/allegro/bigcache)
-  - slow down when data bigger than 1K
-
-- [cachego](https://github.com/FishGoddess/cachego)
-
-- [ecache](https://github.com/orca-zhang/ecache)
-
-- [freecache](https://github.com/coocood/freecache)
-  - slow down when data bigger than 1M
-
-- [gcache](https://github.com/bluele/gcache)
+# Misc
 
 - create a issue to add new libraries

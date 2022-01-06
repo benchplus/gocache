@@ -48,10 +48,10 @@ func BenchmarkPut1K_cachego(b *testing.B) {
 	}
 }
 
-func BenchmarkGetIntMiss_cachego(b *testing.B) {
+func BenchmarkPut1M_cachego(b *testing.B) {
 	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
 	for i := 0; i < b.N; i++ {
-		cache.Get(fmt.Sprint(i))
+		cache.SetWithTTL(fmt.Sprint(i), gocache.Data1M, 10)
 	}
 }
 

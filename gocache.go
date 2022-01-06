@@ -25,6 +25,7 @@ func randomString(n int) []byte {
 }
 
 var Data1K = randomString(1024)
+var Data1M = randomString(1048576)
 
 var previousPause time.Duration
 

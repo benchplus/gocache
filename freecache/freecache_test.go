@@ -49,10 +49,10 @@ func BenchmarkPut1K_freecache(b *testing.B) {
 	}
 }
 
-func BenchmarkGetIntMiss_freecache(b *testing.B) {
-	cache := freecache.NewCache(256 * 32 * 8)
+func BenchmarkPut1M_freecache(b *testing.B) {
+	cache := freecache.NewCache(256 * 32 * 1024)
 	for i := 0; i < b.N; i++ {
-		cache.Get([]byte(fmt.Sprint(i)))
+		cache.Set([]byte(fmt.Sprint(i)), gocache.Data1M, 10)
 	}
 }
 
