@@ -1,5 +1,7 @@
 github.com/FishGoddess/cachego v0.2.5 h1:lrrBbSK+MHMWJUsuij8tnsYGqIVXqpJ9iVaLY4b39eo=
 github.com/FishGoddess/cachego v0.2.5/go.mod h1:HNPPUzZJIiyox8NUJYc67LDZCQLSkwyUqDTA6AqBiME=
+github.com/FishGoddess/cachego v0.3.1-alpha h1:T7WfB60j7lHW6Hb+L32S+W80Eq2eoXloMj5QaEEPrZ8=
+github.com/FishGoddess/cachego v0.3.1-alpha/go.mod h1:HNPPUzZJIiyox8NUJYc67LDZCQLSkwyUqDTA6AqBiME=
 github.com/OneOfOne/xxhash v1.2.2 h1:KMrpdQIwFcEqXDklaen+P1axHaj9BSKzvpUUfnHldSE=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/allegro/bigcache v1.2.1 h1:hg1sY1raCwic3Vnsvje6TT7/pnZba83LeFck5NrFKSc=
