@@ -133,7 +133,7 @@
    </tr>
 </table>
 
-> :airplane: for fast, :rocket: for faster.
+> :airplane: for fast, :rocket: for very-fast.
 
 # Default parameters
 
