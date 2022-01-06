@@ -9,10 +9,110 @@
   </a>
 </p>
 
-
 # Reports
 
 [Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
+
+
+
+<table style="text-align: center">
+   <tr>
+      <td>case</td>
+      <td>bigcache</td>
+      <td>cachego</td>
+      <td>ecache</td>
+      <td>freecache</td>
+      <td>gcache</td>
+   </tr>
+   <tr>
+      <td>PutInt</td>
+      <td>:airplane:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
+      <td>GetInt</td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+      <td>:rocket:</td>
+      <td></td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
+      <td>Put1K</td>
+      <td></td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
+      <td>PutTinyObject</td>
+      <td>:airplane:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
+      <td>ChangeOutAllInt</td>
+      <td>:airplane:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
+      <td>HeavyReadInt</td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td></td>
+      <td>:airplane:</td>
+   </tr>
+   <tr>
+      <td>HeavyReadIntGC</td>
+      <td>:airplane:</td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>HeavyWriteInt</td>
+      <td>:rocket:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:airplane:</td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>HeavyWriteIntGC</td>
+      <td>:rocket:</td>
+      <td></td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>HeavyWrite1K</td>
+      <td>:x:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>HeavyWrite1KGC</td>
+      <td>:x:</td>
+      <td></td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td></td>
+   </tr>
+</table>
 
 
 # Default parameters
@@ -26,12 +126,14 @@
 # Libraries
 
 - [bigcache](https://github.com/allegro/bigcache)
+  - slow down when data bigger than 1K
 
 - [cachego](https://github.com/FishGoddess/cachego)
 
 - [ecache](https://github.com/orca-zhang/ecache)
 
 - [freecache](https://github.com/coocood/freecache)
+  - slow down when data bigger than 1M
 
 - [gcache](https://github.com/bluele/gcache)
 
