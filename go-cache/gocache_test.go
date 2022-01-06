@@ -28,14 +28,14 @@ func shutdown() {
 	gocache.PrintGCPause()
 }
 
-func BenchmarkPutInt_gcache(b *testing.B) {
+func BenchmarkPutInt_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	for i := 0; i < b.N; i++ {
 		c.Set(fmt.Sprint(i), i+1, cache.DefaultExpiration)
 	}
 }
 
-func BenchmarkGetInt_gcache(b *testing.B) {
+func BenchmarkGetInt_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	c.Set("0", "0", cache.DefaultExpiration)
 	for i := 0; i < b.N; i++ {
@@ -43,21 +43,21 @@ func BenchmarkGetInt_gcache(b *testing.B) {
 	}
 }
 
-func BenchmarkPut1K_gcache(b *testing.B) {
+func BenchmarkPut1K_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	for i := 0; i < b.N; i++ {
 		c.Set(fmt.Sprint(i), gocache.Data1K, cache.DefaultExpiration)
 	}
 }
 
-func BenchmarkPut1M_gcache(b *testing.B) {
+func BenchmarkPut1M_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	for i := 0; i < b.N; i++ {
 		c.Set(fmt.Sprint(i), gocache.Data1M, cache.DefaultExpiration)
 	}
 }
 
-func BenchmarkPutTinyObject_gcache(b *testing.B) {
+func BenchmarkPutTinyObject_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	for i := 0; i < b.N; i++ {
 		data, _ := proto.Marshal(&gocache.UserInfo{})
@@ -65,14 +65,14 @@ func BenchmarkPutTinyObject_gcache(b *testing.B) {
 	}
 }
 
-func BenchmarkChangeOutAllInt_gcache(b *testing.B) {
+func BenchmarkChangeOutAllInt_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	for i := 0; i < b.N*1024; i++ {
 		c.Set(fmt.Sprint(i), i+1, cache.DefaultExpiration)
 	}
 }
 
-func BenchmarkHeavyReadInt_gcache(b *testing.B) {
+func BenchmarkHeavyReadInt_gocache(b *testing.B) {
 	gocache.GCPause()
 
 	c := cache.New(10*time.Second, 0)
@@ -94,7 +94,7 @@ func BenchmarkHeavyReadInt_gcache(b *testing.B) {
 	gocache.AddGCPause("HeavyReadInt")
 }
 
-func BenchmarkHeavyWriteInt_gcache(b *testing.B) {
+func BenchmarkHeavyWriteInt_gocache(b *testing.B) {
 	gocache.GCPause()
 
 	c := cache.New(10*time.Second, 0)
@@ -114,7 +114,7 @@ func BenchmarkHeavyWriteInt_gcache(b *testing.B) {
 	gocache.AddGCPause("HeavyWriteInt")
 }
 
-func BenchmarkHeavyWrite1K_gcache(b *testing.B) {
+func BenchmarkHeavyWrite1K_gocache(b *testing.B) {
 	gocache.GCPause()
 
 	c := cache.New(10*time.Second, 0)
