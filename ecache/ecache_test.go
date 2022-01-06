@@ -30,29 +30,29 @@ func shutdown() {
 func BenchmarkPutInt_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < b.N; i++ {
-		cache.PutV(fmt.Sprint(i), nil, ecache.D(int64(i+1)))
+		cache.PutInt64(fmt.Sprint(i), int64(i+1))
 	}
 }
 
 func BenchmarkGetInt_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
-	cache.PutV("0", nil, ecache.D(1))
+	cache.PutInt64("0", 1)
 	for i := 0; i < b.N; i++ {
-		cache.GetV("0")
+		cache.GetInt64("0")
 	}
 }
 
 func BenchmarkPut1K_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < b.N; i++ {
-		cache.PutV(fmt.Sprint(i), nil, gocache.Data1K)
+		cache.PutBytes(fmt.Sprint(i), gocache.Data1K)
 	}
 }
 
 func BenchmarkGetIntMiss_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < b.N; i++ {
-		cache.GetV(fmt.Sprint(i))
+		cache.GetInt64(fmt.Sprint(i))
 	}
 }
 
@@ -66,7 +66,7 @@ func BenchmarkPutTinyObject_ecache(b *testing.B) {
 func BenchmarkChangeOutAllInt_ecache(b *testing.B) {
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < b.N*1024; i++ {
-		cache.PutV(fmt.Sprint(i), nil, ecache.D(int64(i+1)))
+		cache.PutInt64(fmt.Sprint(i), int64(i+1))
 	}
 }
 
@@ -75,14 +75,14 @@ func BenchmarkHeavyReadInt_ecache(b *testing.B) {
 
 	cache := ecache.NewLRUCache(256, 32, 10*time.Second)
 	for i := 0; i < 1024; i++ {
-		cache.PutV(fmt.Sprint(i), nil, ecache.D(int64(i+1)))
+		cache.PutInt64(fmt.Sprint(i), int64(i+1))
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
-				cache.GetV(fmt.Sprint(i))
+				cache.GetInt64(fmt.Sprint(i))
 			}
 			wg.Done()
 		}()
@@ -102,7 +102,7 @@ func BenchmarkHeavyWriteInt_ecache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.PutV(fmt.Sprint(i+start), nil, ecache.D(int64(i+1)))
+				cache.PutInt64(fmt.Sprint(i+start), int64(i+1))
 			}
 			wg.Done()
 		}()
@@ -122,7 +122,7 @@ func BenchmarkHeavyWrite1K_ecache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.PutV(fmt.Sprint(i+start), nil, gocache.Data1K)
+				cache.PutBytes(fmt.Sprint(i+start), gocache.Data1K)
 			}
 			wg.Done()
 		}()
