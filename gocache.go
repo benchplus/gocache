@@ -16,6 +16,10 @@ func D(d int64) []byte {
 	return data[:]
 }
 
+func Int64Key(d int64) string {
+	return string(D(d))
+}
+
 func randomString(n int) []byte {
 	b := make([]byte, n)
 	for i := range b {

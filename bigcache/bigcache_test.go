@@ -1,7 +1,6 @@
 package benchplus
 
 import (
-	"fmt"
 	"os"
 	"runtime/debug"
 	"sync"
@@ -37,7 +36,7 @@ func BenchmarkPutInt_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
-		cache.Set(fmt.Sprint(i), gocache.D(int64(i+1)))
+		cache.Set(gocache.Int64Key(int64(i)), gocache.D(int64(i+1)))
 	}
 }
 
@@ -64,7 +63,7 @@ func BenchmarkPut1K_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
-		cache.Set(fmt.Sprint(i), gocache.Data1K)
+		cache.Set(gocache.Int64Key(int64(i)), gocache.Data1K)
 	}
 }
 
@@ -77,7 +76,7 @@ func BenchmarkPut1M_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
-		cache.Set(fmt.Sprint(i), gocache.Data1M)
+		cache.Set(gocache.Int64Key(int64(i)), gocache.Data1M)
 	}
 }
 
@@ -91,7 +90,7 @@ func BenchmarkPutTinyObject_bigcache(b *testing.B) {
 	})
 	for i := 0; i < b.N; i++ {
 		data, _ := proto.Marshal(&gocache.UserInfo{})
-		cache.Set(fmt.Sprint(i), data)
+		cache.Set(gocache.Int64Key(int64(i)), data)
 	}
 }
 
@@ -104,7 +103,7 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < b.N*1024; i++ {
-		cache.Set(fmt.Sprint(i), gocache.D(int64(i+1)))
+		cache.Set(gocache.Int64Key(int64(i)), gocache.D(int64(i+1)))
 	}
 }
 
@@ -119,14 +118,14 @@ func BenchmarkHeavyReadInt_bigcache(b *testing.B) {
 		Verbose:            false,
 	})
 	for i := 0; i < 1024; i++ {
-		cache.Set(fmt.Sprint(i), gocache.D(int64(i+1)))
+		cache.Set(gocache.Int64Key(int64(i)), gocache.D(int64(i+1)))
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
-				cache.Get(fmt.Sprint(i))
+				cache.Get(gocache.Int64Key(int64(i)))
 			}
 			wg.Done()
 		}()
@@ -152,7 +151,7 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.Set(fmt.Sprint(i+start), gocache.D(int64(i+1)))
+				cache.Set(gocache.Int64Key(int64(i+start)), gocache.D(int64(i+1)))
 			}
 			wg.Done()
 		}()
@@ -175,10 +174,11 @@ func BenchmarkHeavyWrite1K_bigcache(b *testing.B) {
 	})
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
+		start := index
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				cache.Set(fmt.Sprint(i), gocache.Data1K)
+				cache.Set(gocache.Int64Key(int64(i+start)), gocache.Data1K)
 			}
 			wg.Done()
 		}()
