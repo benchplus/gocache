@@ -71,7 +71,7 @@ func AddMem(name string) {
 	var ms runtime.MemStats
 	runtime.ReadMemStats(&ms)
 	pc, _, _, _ := runtime.Caller(1)
-	name = strings.Replace(runtime.FuncForPC(pc).Name(), "_", "GC_", 1)
+	name = strings.Replace(runtime.FuncForPC(pc).Name(), "_", "Mem_", 1)
 	name = name[strings.Index(name, "Benchmark"):]
 	if _, ok := memResult[name]; !ok {
 		memResult[name] = ms.Sys
