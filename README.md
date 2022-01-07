@@ -13,6 +13,8 @@
 
 - [Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
 
+- <a href="https://github.com/kpango/gache"><strong>gache</strong></a> & <a href="https://github.com/hlts2/gocache"><strong>gocache</strong></a> not performance good, so remove them out from the bench.
+
 <table style="text-align: center">
    <tr>
       <td></td>
@@ -20,10 +22,8 @@
       <td><a href="https://github.com/FishGoddess/cachego"><strong>cachego</strong></a></td>
       <td><a href="https://github.com/orca-zhang/ecache"><strong>ecache</strong></a></td>
       <td><a href="https://github.com/coocood/freecache"><strong>freecache</strong></a></td>
-      <td><a href="https://github.com/kpango/gache"><strong>gache</strong></a></td>
       <td><a href="https://github.com/bluele/gcache"><strong>gcache</strong></a></td>
       <td><a href="https://github.com/patrickmn/go-cache"><strong>go-cache</strong></a></td>
-      <td><a href="https://github.com/hlts2/gocache"><strong>gocache</strong></a></td>
    </tr>
    <tr>
       <td>PutInt</td>
@@ -31,10 +31,8 @@
       <td></td>
       <td>:rocket:</td>
       <td>:rocket:</td>
-      <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
    <tr>
       <td>GetInt</td>
@@ -44,8 +42,6 @@
       <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td>:airplane:</td>
-      <td>:airplane:</td>
    </tr>
    <tr>
       <td>Put1K</td>
@@ -53,10 +49,8 @@
       <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
-      <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
    <tr>
       <td>Put1M</td>
@@ -64,10 +58,8 @@
       <td></td>
       <td>:rocket:</td>
       <td>:x:</td>
-      <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
    <tr>
       <td>PutTinyObject</td>
@@ -75,9 +67,7 @@
       <td></td>
       <td>:rocket:</td>
       <td>:rocket:</td>
-      <td></td>
       <td>:airplane:</td>
-      <td></td>
       <td></td>
    </tr>
    <tr>
@@ -86,10 +76,8 @@
       <td></td>
       <td>:rocket:</td>
       <td>:rocket:</td>
-      <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
    <tr>
       <td>HeavyReadInt</td>
@@ -98,8 +86,6 @@
       <td>:rocket:</td>
       <td></td>
       <td></td>
-      <td></td>
-      <td>:rocket:</td>
       <td>:rocket:</td>
    </tr>
    <tr>
@@ -108,8 +94,6 @@
       <td>:rocket:</td>
       <td>:rocket:</td>
       <td></td>
-      <td>:rocket:</td>
-      <td>:airplane:</td>
       <td>:airplane:</td>
       <td>:airplane:</td>
    </tr>
@@ -120,9 +104,7 @@
       <td>:rocket:</td>
       <td>:rocket:</td>
       <td></td>
-      <td></td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
    <tr>
       <td>HeavyWriteIntGC</td>
@@ -130,8 +112,6 @@
       <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td>:rocket:</td>
-      <td></td>
       <td></td>
       <td></td>
    </tr>
@@ -142,9 +122,7 @@
       <td>:rocket:</td>
       <td>:rocket:</td>
       <td></td>
-      <td></td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
    <tr>
       <td>HeavyWrite1KGC</td>
@@ -152,10 +130,8 @@
       <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
-      <td>:rocket:</td>
       <td></td>
       <td>:airplane:</td>
-      <td></td>
    </tr>
 </table>
 
