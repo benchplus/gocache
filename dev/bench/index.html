@@ -177,17 +177,29 @@
 
             if (dataset[0].bench.value > 10000) {
               dataset.forEach(e => {
-                  e.bench.unit = 'us/op';
+                  if (e.bench.unit == 'B') {
+                    e.bench.unit = 'KB';
+                  } else {
+                    e.bench.unit = 'us/op';
+                  }
                   e.bench.value /= 1000.;
               });
               if (dataset[0].bench.value > 10000) {
                 dataset.forEach(e => {
-                    e.bench.unit = 'ms/op';
+                    if (e.bench.unit == 'KB') {
+                      e.bench.unit = 'MB';
+                    } else {
+                      e.bench.unit = 'ms/op';
+                    }
                     e.bench.value /= 1000.;
                 });
                 if (dataset[0].bench.value > 10000) {
                   dataset.forEach(e => {
-                      e.bench.unit = 's/op';
+                      if (e.bench.unit == 'MB') {
+                        e.bench.unit = 'GB';
+                      } else {
+                        e.bench.unit = 's/op';
+                      }
                       e.bench.value /= 1000.;
                   });
                 }
