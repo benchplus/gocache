@@ -1,0 +1,143 @@
+package benchplus
+
+import (
+	"os"
+	"runtime/debug"
+	"sync"
+	"testing"
+	"time"
+
+	"github.com/benchplus/gocache"
+	"github.com/golang/protobuf/proto"
+	g2 "github.com/hlts2/gocache"
+)
+
+func TestMain(m *testing.M) {
+	setup()
+	code := m.Run()
+	shutdown()
+	os.Exit(code)
+}
+
+func setup() {
+	debug.SetGCPercent(10)
+}
+
+func shutdown() {
+	gocache.PrintGCPause()
+}
+
+func BenchmarkPutInt_gocache(b *testing.B) {
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	for i := 0; i < b.N; i++ {
+		c.Set(gocache.Int64Key(int64(i)), i+1)
+	}
+}
+
+func BenchmarkGetInt_gocache(b *testing.B) {
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	c.Set("0", "0")
+	for i := 0; i < b.N; i++ {
+		c.Get("0")
+	}
+}
+
+func BenchmarkPut1K_gocache(b *testing.B) {
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	for i := 0; i < b.N; i++ {
+		c.Set(gocache.Int64Key(int64(i)), gocache.Data1K)
+	}
+}
+
+func BenchmarkPut1M_gocache(b *testing.B) {
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	for i := 0; i < b.N; i++ {
+		c.Set(gocache.Int64Key(int64(i)), gocache.Data1M)
+	}
+}
+
+func BenchmarkPutTinyObject_gocache(b *testing.B) {
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	for i := 0; i < b.N; i++ {
+		data, _ := proto.Marshal(&gocache.UserInfo{})
+		c.Set(gocache.Int64Key(int64(i)), data)
+	}
+}
+
+func BenchmarkChangeOutAllInt_gocache(b *testing.B) {
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	for i := 0; i < b.N*1024; i++ {
+		c.Set(gocache.Int64Key(int64(i)), i+1)
+	}
+}
+
+func BenchmarkHeavyReadInt_gocache(b *testing.B) {
+	gocache.GCPause()
+
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	for i := 0; i < 1024; i++ {
+		c.Set(gocache.Int64Key(int64(i)), i+1)
+	}
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 1024; i++ {
+				c.Get(gocache.Int64Key(int64(i)))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyReadInt")
+}
+
+func BenchmarkHeavyWriteInt_gocache(b *testing.B) {
+	gocache.GCPause()
+
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		start := index
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				c.Set(gocache.Int64Key(int64(i+start)), i+1)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWriteInt")
+}
+
+func BenchmarkHeavyWrite1K_gocache(b *testing.B) {
+	gocache.GCPause()
+
+	// DefaultShardsCount uint64 = 256
+	c := g2.New(g2.WithExpireAt(10 * time.Second))
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		start := index
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				c.Set(gocache.Int64Key(int64(i+start)), gocache.Data1K)
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddGCPause("HeavyWrite1K")
+}
