@@ -24,6 +24,7 @@ func setup() {
 
 func shutdown() {
 	gocache.PrintGCPause()
+	gocache.PrintMem()
 }
 
 func BenchmarkPutInt_freecache(b *testing.B) {
@@ -110,6 +111,30 @@ func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
 	wg.Wait()
 
 	gocache.AddGCPause("HeavyWriteInt")
+}
+
+func BenchmarkHeavyMixedInt_freecache(b *testing.B) {
+	cache := freecache.NewCache(256 * 32 * 8)
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				cache.Set(gocache.D(int64(i)), gocache.D(int64(i+1)), 10)
+			}
+			wg.Done()
+		}()
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				cache.Get(gocache.D(int64(i)))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddMem("HeavyMixedInt")
 }
 
 func BenchmarkHeavyWrite1K_freecache(b *testing.B) {

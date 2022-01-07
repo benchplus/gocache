@@ -55,6 +55,25 @@ func AddGCPause(name string) {
 
 func PrintGCPause() {
 	for k, v := range gcResult {
-		fmt.Printf("%s-2 1 %d ns/op\n", k, v)
+		fmt.Printf("%s-1 1 %d ns/op\n", k, v)
+	}
+}
+
+func PrintMem() {
+	for k, v := range memResult {
+		fmt.Printf("%s-1 1 %d B\n", k, v)
+	}
+}
+
+var memResult = make(map[string]uint64, 0)
+
+func AddMem(name string) {
+	var ms runtime.MemStats
+	runtime.ReadMemStats(&ms)
+	pc, _, _, _ := runtime.Caller(1)
+	name = strings.Replace(runtime.FuncForPC(pc).Name(), "_", "GC_", 1)
+	name = name[strings.Index(name, "Benchmark"):]
+	if _, ok := memResult[name]; !ok {
+		memResult[name] = ms.Sys
 	}
 }

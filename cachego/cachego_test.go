@@ -24,6 +24,7 @@ func setup() {
 
 func shutdown() {
 	gocache.PrintGCPause()
+	gocache.PrintMem()
 }
 
 func BenchmarkPutInt_cachego(b *testing.B) {
@@ -109,6 +110,30 @@ func BenchmarkHeavyWriteInt_cachego(b *testing.B) {
 	wg.Wait()
 
 	gocache.AddGCPause("HeavyWriteInt")
+}
+
+func BenchmarkHeavyMixedInt_cachego(b *testing.B) {
+	cache := cachego.NewCache(cachego.WithSegmentSize(256), cachego.WithMapSize(32))
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				cache.Set(gocache.Int64Key(int64(i)), i+1, cachego.WithSetTTL(10*time.Second))
+			}
+			wg.Done()
+		}()
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				cache.Get(gocache.Int64Key(int64(i)))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddMem("HeavyMixedInt")
 }
 
 func BenchmarkHeavyWrite1K_cachego(b *testing.B) {

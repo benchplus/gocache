@@ -27,6 +27,7 @@ func setup() {
 func shutdown() {
 	gache.Clear()
 	gocache.PrintGCPause()
+	gocache.PrintMem()
 }
 
 func BenchmarkPutInt_gache(b *testing.B) {
