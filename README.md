@@ -30,10 +30,10 @@
       <td>:airplane:</td>
       <td></td>
       <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
-      <td></td>
       <td></td>
    </tr>
    <tr>
@@ -42,20 +42,20 @@
       <td>:airplane:</td>
       <td>:rocket:</td>
       <td></td>
-      <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
    </tr>
    <tr>
       <td>Put1K</td>
-      <td></td>
-      <td></td>
+      <td>:airplane:</td>
+      <td>:airplane:</td>
+      <td>:rocket:</td>
       <td>:rocket:</td>
       <td>:airplane:</td>
-      <td></td>
+      <td>:rocket:</td>
       <td>:airplane:</td>
-      <td></td>
       <td></td>
    </tr>
    <tr>
@@ -66,7 +66,7 @@
       <td>:x:</td>
       <td></td>
       <td>:airplane:</td>
-      <td></td>
+      <td>:airplane:</td>
       <td></td>
    </tr>
    <tr>
@@ -74,7 +74,7 @@
       <td>:airplane:</td>
       <td></td>
       <td>:rocket:</td>
-      <td>:airplane:</td>
+      <td>:rocket:</td>
       <td></td>
       <td>:airplane:</td>
       <td></td>
@@ -85,10 +85,10 @@
       <td>:airplane:</td>
       <td></td>
       <td>:rocket:</td>
-      <td>:airplane:</td>
+      <td>:rocket:</td>
       <td></td>
       <td>:airplane:</td>
-      <td></td>
+      <td>:airplane:</td>
       <td></td>
    </tr>
    <tr>
@@ -98,30 +98,30 @@
       <td>:rocket:</td>
       <td></td>
       <td></td>
-      <td>:airplane:</td>
-      <td>:rocket:</td>
       <td></td>
+      <td>:rocket:</td>
+      <td>:rocket:</td>
    </tr>
    <tr>
       <td>HeavyReadIntGC</td>
-      <td></td>
+      <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
       <td></td>
-      <td></td>
+      <td>:rocket:</td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
+      <td>:airplane:</td>
    </tr>
    <tr>
       <td>HeavyWriteInt</td>
       <td>:rocket:</td>
-      <td></td>
-      <td>:rocket:</td>
       <td>:airplane:</td>
-      <td></td>
-      <td></td>
       <td>:rocket:</td>
+      <td>:rocket:</td>
+      <td></td>
+      <td></td>
+      <td>:airplane:</td>
       <td></td>
    </tr>
    <tr>
@@ -130,15 +130,15 @@
       <td></td>
       <td>:airplane:</td>
       <td>:airplane:</td>
-      <td></td>
-      <td></td>
       <td>:rocket:</td>
+      <td></td>
+      <td></td>
       <td></td>
    </tr>
    <tr>
       <td>HeavyWrite1K</td>
       <td>:x:</td>
-      <td></td>
+      <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
       <td></td>
@@ -149,10 +149,10 @@
    <tr>
       <td>HeavyWrite1KGC</td>
       <td>:x:</td>
-      <td></td>
+      <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
-      <td></td>
+      <td>:rocket:</td>
       <td></td>
       <td>:airplane:</td>
       <td></td>
