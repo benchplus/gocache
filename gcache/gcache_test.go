@@ -114,7 +114,7 @@ func BenchmarkHeavyWriteInt_gcache(b *testing.B) {
 	gocache.AddGCPause("HeavyWriteInt")
 }
 
-func BenchmarkHeavyMixednt_gcache(b *testing.B) {
+func BenchmarkHeavyMixedInt_gcache(b *testing.B) {
 	cache := gcache.New(256 * 32).LRU().Build()
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
