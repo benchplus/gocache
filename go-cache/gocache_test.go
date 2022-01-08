@@ -28,6 +28,30 @@ func shutdown() {
 	gocache.PrintMem()
 }
 
+func BenchmarkHeavyMixedInt_gocache(b *testing.B) {
+	c := cache.New(10*time.Second, 0)
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				c.Set(gocache.Int64Key(int64(i)), i+1, cache.DefaultExpiration)
+			}
+			wg.Done()
+		}()
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				c.Get(gocache.Int64Key(int64(i)))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddMem("HeavyMixedInt")
+}
+
 func BenchmarkPutInt_gocache(b *testing.B) {
 	c := cache.New(10*time.Second, 0)
 	for i := 0; i < b.N; i++ {
@@ -112,30 +136,6 @@ func BenchmarkHeavyWriteInt_gocache(b *testing.B) {
 	wg.Wait()
 
 	gocache.AddGCPause("HeavyWriteInt")
-}
-
-func BenchmarkHeavyMixedInt_gocache(b *testing.B) {
-	c := cache.New(10*time.Second, 0)
-	var wg sync.WaitGroup
-	for index := 0; index < 10000; index++ {
-		wg.Add(1)
-		go func() {
-			for i := 0; i < 8192; i++ {
-				c.Set(gocache.Int64Key(int64(i)), i+1, cache.DefaultExpiration)
-			}
-			wg.Done()
-		}()
-		wg.Add(1)
-		go func() {
-			for i := 0; i < 8192; i++ {
-				c.Get(gocache.Int64Key(int64(i)))
-			}
-			wg.Done()
-		}()
-	}
-	wg.Wait()
-
-	gocache.AddMem("HeavyMixedInt")
 }
 
 func BenchmarkHeavyWrite1K_gocache(b *testing.B) {

@@ -1,6 +1,7 @@
 package benchplus
 
 import (
+	"fmt"
 	"os"
 	"runtime/debug"
 	"sync"
@@ -24,8 +25,41 @@ func setup() {
 }
 
 func shutdown() {
+	// mock comment-out result
+	fmt.Printf("BenchmarkHeavyWrite1K_bigcache-1 1 0 ns/op\n")
+	fmt.Printf("BenchmarkHeavyWrite1KGC_bigcache-1 1 0 ns/op\n")
 	gocache.PrintGCPause()
 	gocache.PrintMem()
+}
+
+func BenchmarkHeavyMixedInt_bigcache(b *testing.B) {
+	cache, _ := bigcache.NewBigCache(bigcache.Config{
+		Shards:             256,
+		LifeWindow:         10 * time.Second,
+		MaxEntriesInWindow: 32,
+		MaxEntrySize:       32,
+		Verbose:            false,
+	})
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				cache.Set(gocache.Int64Key(int64(i)), gocache.D(int64(i+1)))
+			}
+			wg.Done()
+		}()
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				cache.Get(gocache.Int64Key(int64(i)))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddMem("HeavyMixedInt")
 }
 
 func BenchmarkPutInt_bigcache(b *testing.B) {
@@ -160,36 +194,6 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 	wg.Wait()
 
 	gocache.AddGCPause("HeavyWriteInt")
-}
-
-func BenchmarkHeavyMixedInt_bigcache(b *testing.B) {
-	cache, _ := bigcache.NewBigCache(bigcache.Config{
-		Shards:             256,
-		LifeWindow:         10 * time.Second,
-		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
-		Verbose:            false,
-	})
-	var wg sync.WaitGroup
-	for index := 0; index < 10000; index++ {
-		wg.Add(1)
-		go func() {
-			for i := 0; i < 8192; i++ {
-				cache.Set(gocache.Int64Key(int64(i)), gocache.D(int64(i+1)))
-			}
-			wg.Done()
-		}()
-		wg.Add(1)
-		go func() {
-			for i := 0; i < 8192; i++ {
-				cache.Get(gocache.Int64Key(int64(i)))
-			}
-			wg.Done()
-		}()
-	}
-	wg.Wait()
-
-	gocache.AddMem("HeavyMixedInt")
 }
 
 /* ran too long, comment-out

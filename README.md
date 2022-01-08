@@ -146,10 +146,10 @@
    </tr>
    <tr>
       <td>HeavyMixedIntMem</td>
-      <td>:x:</td>
+      <td></td>
       <td>:airplane:</td>
       <td>:rocket:</td>
-      <td>:x:</td>
+      <td></td>
       <td>:rocket:</td>
       <td></td>
    </tr>
