@@ -37,7 +37,7 @@ func BenchmarkHeavyMixedInt_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	var wg sync.WaitGroup
@@ -67,7 +67,7 @@ func BenchmarkPutInt_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -80,7 +80,7 @@ func BenchmarkGetInt_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	cache.Set("0", []byte("1"))
@@ -120,7 +120,7 @@ func BenchmarkPutTinyObject_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N; i++ {
@@ -134,7 +134,7 @@ func BenchmarkChangeOutAllInt_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	for i := 0; i < b.N*1024; i++ {
@@ -149,7 +149,7 @@ func BenchmarkHeavyReadInt_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	for i := 0; i < 1024; i++ {
@@ -177,7 +177,7 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 		Shards:             256,
 		LifeWindow:         10 * time.Second,
 		MaxEntriesInWindow: 32,
-		MaxEntrySize:       32,
+		MaxEntrySize:       8,
 		Verbose:            false,
 	})
 	var wg sync.WaitGroup
