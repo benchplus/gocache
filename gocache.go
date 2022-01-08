@@ -6,18 +6,18 @@ import (
 	"math/rand"
 	"runtime"
 	"runtime/debug"
+	"strconv"
 	"strings"
 	"time"
 )
 
 func D(d int64) []byte {
-	var data [8]byte
-	binary.LittleEndian.PutUint64(data[:], uint64(d))
-	return data[:]
+	var data [10]byte
+	return data[:binary.PutVarint(data[:], int64(d))]
 }
 
 func Int64Key(d int64) string {
-	return string(D(d))
+	return strconv.FormatInt(d, 10)
 }
 
 func randomString(n int) []byte {
