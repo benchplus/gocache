@@ -175,7 +175,7 @@
             canvas.className = 'benchmark-chart';
             parent.appendChild(canvas);
 
-            if (dataset[0].bench.value > 10000) {
+            if (dataset[1].bench.value > 10000) {
               dataset.forEach(e => {
                   if (e.bench.unit == 'B') {
                     e.bench.unit = 'KB';
@@ -184,7 +184,7 @@
                   }
                   e.bench.value /= 1000.;
               });
-              if (dataset[0].bench.value > 10000) {
+              if (dataset[1].bench.value > 10000) {
                 dataset.forEach(e => {
                     if (e.bench.unit == 'KB') {
                       e.bench.unit = 'MB';
@@ -193,7 +193,7 @@
                     }
                     e.bench.value /= 1000.;
                 });
-                if (dataset[0].bench.value > 10000) {
+                if (dataset[1].bench.value > 10000) {
                   dataset.forEach(e => {
                       if (e.bench.unit == 'MB') {
                         e.bench.unit = 'GB';
@@ -219,7 +219,7 @@
                   borderColor: color,
                   backgroundColor: color + '60', // Add alpha for #rrggbbaa
                 }
-              if ((e.libName == 'bigcache' || e.libName == 'freecache') && (method == 'Put1M' || method == 'HeavyMixedIntMem')) {
+              if ((e.libName == 'bigcache' || e.libName == 'freecache') && (method == 'Put1M') || (e.libName == 'bigcache') && method == 'HeavyMixedIntMem') {
                 d['hidden'] = true;
               }
               data.datasets.push(d)
@@ -238,7 +238,7 @@
                   {
                     scaleLabel: {
                       display: true,
-                      labelString: dataset[0].bench.unit,
+                      labelString: dataset[1].bench.unit,
                     },
                     ticks: {
                       beginAtZero: true,
