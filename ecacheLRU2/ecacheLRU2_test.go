@@ -160,9 +160,30 @@ func BenchmarkHeavyWrite1K_ecacheLRU2(b *testing.B) {
 	gocache.AddGCPause()
 }
 
+// 41 - 40.10%
+// 40 - 41.00%
+// 39 - 41.62%
+// 38 - 42.17%
+// 37 - 42.60%
+// 36 - 42.97%
+// 35 - 43.32%
+// 34 - 43.42%
+// 33 - 43.58%
+// 32 - 43.64% // almost 3/4, best
+// 31 - 43.49%
+// 30 - 43.25%
+// 29 - 43.05%
+// 28 - 42.66%
+// 25 - 41.43%
+// 20 - 38.62%
+// 15 - 32.91%
+// 10 - 23.49%
+// 5  - 12.74%
+// 1  - 2.71%
+
 func BenchmarkCacheHitRate_ecacheLRU2(b *testing.B) {
 	rand.Seed(168888888888)
-	cache := ecache.NewLRUCache(256, 21, 30*time.Second).LRU2(21)
+	cache := ecache.NewLRUCache(256, 32, 30*time.Second).LRU2(10)
 	for i := 0; i < 100000; i++ {
 		cache.PutInt64(gocache.Int64Key(int64(i)), int64(i+1))
 	}

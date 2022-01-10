@@ -162,7 +162,7 @@ func BenchmarkHeavyWrite1K_freecache(b *testing.B) {
 
 func BenchmarkCacheHitRate_freecache(b *testing.B) {
 	rand.Seed(168888888888)
-	cache := freecache.NewCache(256 * 44 * 1024)
+	cache := freecache.NewCache(256 * 42 * 1024)
 	for i := 0; i < 100000; i++ {
 		cache.Set(gocache.D(int64(i)), gocache.Data1K, 10)
 	}
