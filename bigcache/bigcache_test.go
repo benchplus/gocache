@@ -226,7 +226,7 @@ func BenchmarkHeavyWrite1K_bigcache(b *testing.B) {
 }
 */
 
-func BenchmarkCacheRate_bigcache(b *testing.B) {
+func BenchmarkCacheHitRate_bigcache(b *testing.B) {
 	rand.Seed(168888888888)
 	cache, _ := bigcache.NewBigCache(bigcache.Config{
 		HardMaxCacheSize:   11,

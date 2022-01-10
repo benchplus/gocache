@@ -160,7 +160,7 @@ func BenchmarkHeavyWrite1K_ecache(b *testing.B) {
 	gocache.AddGCPause()
 }
 
-func BenchmarkCacheRate_ecache(b *testing.B) {
+func BenchmarkCacheHitRate_ecache(b *testing.B) {
 	rand.Seed(168888888888)
 	cache := ecache.NewLRUCache(256, 42, 10*time.Second)
 	for i := 0; i < 100000; i++ {
