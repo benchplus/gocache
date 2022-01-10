@@ -1,6 +1,8 @@
 package benchplus
 
 import (
+	"fmt"
+	"math/rand"
 	"os"
 	"runtime/debug"
 	"sync"
@@ -25,6 +27,7 @@ func setup() {
 func shutdown() {
 	gocache.PrintGCPause()
 	gocache.PrintMem()
+	gocache.PrintRate()
 }
 
 func BenchmarkHeavyMixedInt_freecache(b *testing.B) {
@@ -48,7 +51,7 @@ func BenchmarkHeavyMixedInt_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddMem("HeavyMixedInt")
+	gocache.AddMem()
 }
 
 func BenchmarkPutInt_freecache(b *testing.B) {
@@ -114,7 +117,7 @@ func BenchmarkHeavyReadInt_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyReadInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
@@ -134,7 +137,7 @@ func BenchmarkHeavyWriteInt_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWriteInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWrite1K_freecache(b *testing.B) {
@@ -154,5 +157,24 @@ func BenchmarkHeavyWrite1K_freecache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite1K")
+	gocache.AddGCPause()
+}
+
+func BenchmarkCacheRate_freecache(b *testing.B) {
+	rand.Seed(168888888888)
+	cache := freecache.NewCache(256 * 44 * 1024)
+	for i := 0; i < 100000; i++ {
+		cache.Set(gocache.D(int64(i)), gocache.Data1K, 10)
+	}
+	fmt.Println(cache.EntryCount())
+	for i := 0; i < 100000; i++ {
+		x := rand.Int63n(20000)
+		if i&1 == 0 {
+			cache.Set(gocache.D(int64(x)), gocache.Data1K, 10)
+		} else {
+			cache.Get(gocache.D(int64(x)))
+		}
+	}
+
+	gocache.AddRate(cache.HitRate())
 }

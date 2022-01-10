@@ -26,6 +26,7 @@ func setup() {
 func shutdown() {
 	gocache.PrintGCPause()
 	gocache.PrintMem()
+	gocache.PrintRate()
 }
 
 func BenchmarkHeavyMixedInt_gocache(b *testing.B) {
@@ -49,7 +50,7 @@ func BenchmarkHeavyMixedInt_gocache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddMem("HeavyMixedInt")
+	gocache.AddMem()
 }
 
 func BenchmarkPutInt_gocache(b *testing.B) {
@@ -115,7 +116,7 @@ func BenchmarkHeavyReadInt_gocache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyReadInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWriteInt_gocache(b *testing.B) {
@@ -135,7 +136,7 @@ func BenchmarkHeavyWriteInt_gocache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWriteInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWrite1K_gocache(b *testing.B) {
@@ -155,5 +156,9 @@ func BenchmarkHeavyWrite1K_gocache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite1K")
+	gocache.AddGCPause()
+}
+
+func BenchmarkCacheRate_gocache(b *testing.B) {
+	gocache.AddRate(0.0)
 }

@@ -1,6 +1,8 @@
 package benchplus
 
 import (
+	"fmt"
+	"math/rand"
 	"os"
 	"runtime/debug"
 	"sync"
@@ -9,6 +11,7 @@ import (
 
 	"github.com/benchplus/gocache"
 	"github.com/orca-zhang/ecache"
+	"github.com/orca-zhang/ecache/stats"
 )
 
 func TestMain(m *testing.M) {
@@ -25,6 +28,7 @@ func setup() {
 func shutdown() {
 	gocache.PrintGCPause()
 	gocache.PrintMem()
+	gocache.PrintRate()
 }
 
 func BenchmarkHeavyMixedInt_ecacheLRU2(b *testing.B) {
@@ -48,7 +52,7 @@ func BenchmarkHeavyMixedInt_ecacheLRU2(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddMem("HeavyMixedInt")
+	gocache.AddMem()
 }
 
 func BenchmarkPutInt_ecacheLRU2(b *testing.B) {
@@ -113,7 +117,7 @@ func BenchmarkHeavyReadInt_ecacheLRU2(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyReadInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWriteInt_ecacheLRU2(b *testing.B) {
@@ -133,7 +137,7 @@ func BenchmarkHeavyWriteInt_ecacheLRU2(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWriteInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWrite1K_ecacheLRU2(b *testing.B) {
@@ -153,5 +157,32 @@ func BenchmarkHeavyWrite1K_ecacheLRU2(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite1K")
+	gocache.AddGCPause()
+}
+
+func BenchmarkCacheRate_ecacheLRU2(b *testing.B) {
+	rand.Seed(168888888888)
+	cache := ecache.NewLRUCache(256, 21, 30*time.Second).LRU2(21)
+	for i := 0; i < 100000; i++ {
+		cache.PutInt64(gocache.Int64Key(int64(i)), int64(i+1))
+	}
+	cnt := 0
+	cache.Walk(func(_ string, _ *interface{}, _ []byte, _ int64) bool {
+		cnt++
+		return true
+	})
+	fmt.Println(cnt)
+	stats.Bind("x", cache)
+	for i := 0; i < 100000; i++ {
+		x := rand.Int63n(20000)
+		if i&1 == 0 {
+			cache.PutInt64(gocache.Int64Key(int64(x)), int64(x+1))
+		} else {
+			cache.Get(gocache.Int64Key(int64(x)))
+		}
+	}
+
+	n, _ := stats.Stats().Load("x")
+	s := n.(*stats.StatsNode)
+	gocache.AddRate(float64(s.GetHit) / float64(s.GetHit+s.GetMiss))
 }

@@ -2,13 +2,14 @@ package benchplus
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"runtime/debug"
 	"sync"
 	"testing"
 	"time"
 
-	"github.com/allegro/bigcache"
+	"github.com/allegro/bigcache/v3"
 	"github.com/benchplus/gocache"
 	"github.com/golang/protobuf/proto"
 )
@@ -30,6 +31,7 @@ func shutdown() {
 	fmt.Printf("BenchmarkHeavyWrite1KGC_bigcache-1 1 0 ns/op\n")
 	gocache.PrintGCPause()
 	gocache.PrintMem()
+	gocache.PrintRate()
 }
 
 func BenchmarkHeavyMixedInt_bigcache(b *testing.B) {
@@ -59,7 +61,7 @@ func BenchmarkHeavyMixedInt_bigcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddMem("HeavyMixedInt")
+	gocache.AddMem()
 }
 
 func BenchmarkPutInt_bigcache(b *testing.B) {
@@ -167,7 +169,7 @@ func BenchmarkHeavyReadInt_bigcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyReadInt")
+	gocache.AddGCPause()
 }
 
 func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
@@ -193,7 +195,7 @@ func BenchmarkHeavyWriteInt_bigcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWriteInt")
+	gocache.AddGCPause()
 }
 
 /* ran too long, comment-out
@@ -220,6 +222,33 @@ func BenchmarkHeavyWrite1K_bigcache(b *testing.B) {
 	}
 	wg.Wait()
 
-	gocache.AddGCPause("HeavyWrite1K")
+	gocache.AddGCPause()
 }
 */
+
+func BenchmarkCacheRate_bigcache(b *testing.B) {
+	rand.Seed(168888888888)
+	cache, _ := bigcache.NewBigCache(bigcache.Config{
+		HardMaxCacheSize:   11,
+		Shards:             256,
+		LifeWindow:         10 * time.Second,
+		MaxEntriesInWindow: 4,
+		MaxEntrySize:       8,
+		Verbose:            false,
+		StatsEnabled:       true,
+	})
+	for i := 0; i < 100000; i++ {
+		cache.Set(gocache.Int64Key(int64(i)), gocache.Data1K)
+	}
+	fmt.Println(cache.Len())
+	for i := 0; i < 100000; i++ {
+		x := rand.Int63n(20000)
+		if i&1 == 0 {
+			cache.Set(gocache.Int64Key(int64(x)), gocache.Data1K)
+		} else {
+			cache.Get(gocache.Int64Key(int64(x)))
+		}
+	}
+	s := cache.Stats()
+	gocache.AddRate(float64(s.Hits) / float64(s.Hits+s.Misses))
+}

@@ -44,9 +44,9 @@ func GCPause() time.Duration {
 
 var gcResult = make(map[string]time.Duration, 0)
 
-func AddGCPause(name string) {
+func AddGCPause() {
 	pc, _, _, _ := runtime.Caller(1)
-	name = strings.Replace(runtime.FuncForPC(pc).Name(), "_", "GC_", 1)
+	name := strings.Replace(runtime.FuncForPC(pc).Name(), "_", "GC_", 1)
 	name = name[strings.Index(name, "Benchmark"):]
 	if _, ok := gcResult[name]; !ok {
 		gcResult[name] = GCPause()
@@ -67,13 +67,32 @@ func PrintMem() {
 
 var memResult = make(map[string]uint64, 0)
 
-func AddMem(name string) {
+func AddMem() {
 	var ms runtime.MemStats
 	runtime.ReadMemStats(&ms)
 	pc, _, _, _ := runtime.Caller(1)
-	name = strings.Replace(runtime.FuncForPC(pc).Name(), "_", "Mem_", 1)
+	name := strings.Replace(runtime.FuncForPC(pc).Name(), "_", "Mem_", 1)
 	name = name[strings.Index(name, "Benchmark"):]
 	if _, ok := memResult[name]; !ok {
 		memResult[name] = ms.Sys
+	}
+}
+
+var rateResult = make(map[string]float64, 0)
+
+func AddRate(r float64) {
+	var ms runtime.MemStats
+	runtime.ReadMemStats(&ms)
+	pc, _, _, _ := runtime.Caller(1)
+	name := runtime.FuncForPC(pc).Name()
+	name = name[strings.Index(name, "Benchmark"):]
+	if _, ok := rateResult[name]; !ok {
+		rateResult[name] = r
+	}
+}
+
+func PrintRate() {
+	for k, v := range rateResult {
+		fmt.Printf("%s-1 1 %.2f %%\n", k, 100.*v)
 	}
 }
