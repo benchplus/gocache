@@ -62,6 +62,8 @@ github.com/orca-zhang/ecache v1.0.6-0.20220110084336-e4596f84e9ff h1:lBw3USXKZu4
 github.com/orca-zhang/ecache v1.0.6-0.20220110084336-e4596f84e9ff/go.mod h1:1/6HCddx1iAbafDyRdddq5v/0rZf5sCU/fkLZ3BhciQ=
 github.com/orca-zhang/ecache v1.0.6-0.20220110092236-8967e9b149d7 h1:B2onUDyPejS+YYiLhHxJsc921rEJjOvwexjTucSBJG4=
 github.com/orca-zhang/ecache v1.0.6-0.20220110092236-8967e9b149d7/go.mod h1:1/6HCddx1iAbafDyRdddq5v/0rZf5sCU/fkLZ3BhciQ=
+github.com/orca-zhang/ecache v1.0.6-0.20220110121223-22406c8ebce7 h1:nx6Odx9BWY6i8ZI0OEL5kfml1xtO+GHezq/53tqQ+ww=
+github.com/orca-zhang/ecache v1.0.6-0.20220110121223-22406c8ebce7/go.mod h1:1/6HCddx1iAbafDyRdddq5v/0rZf5sCU/fkLZ3BhciQ=
 github.com/patrickmn/go-cache v2.1.0+incompatible h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc=
 github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
