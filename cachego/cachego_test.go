@@ -158,7 +158,7 @@ func BenchmarkHeavyWrite1K_cachego(b *testing.B) {
 	gocache.AddGCPause()
 }
 
-func BenchmarkCacheHitRate_bigcache(b *testing.B) {
+func BenchmarkCacheHitRate_cachego(b *testing.B) {
 	fmt.Println("no print")
 	gocache.AddRate(0.0)
 }
