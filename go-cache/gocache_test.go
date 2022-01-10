@@ -1,6 +1,7 @@
 package benchplus
 
 import (
+	"fmt"
 	"os"
 	"runtime/debug"
 	"sync"
@@ -160,5 +161,6 @@ func BenchmarkHeavyWrite1K_gocache(b *testing.B) {
 }
 
 func BenchmarkCacheRate_gocache(b *testing.B) {
+	fmt.Println("no print")
 	gocache.AddRate(0.0)
 }
