@@ -13,9 +13,9 @@
 
 - [Continuous Bencmark Result (click here) ](https://benchplus.github.io/gocache/dev/bench/)
 
-- <a href="https://github.com/kpango/gache"><strong>gache</strong></a> & <a href="https://github.com/hlts2/gocache"><strong>gocache</strong></a> not performance good, so remove them out from the bench.
+- <a href="https://github.com/kpango/gache"><strong>gache</strong></a> & <a href="https://github.com/hlts2/gocache"><strong>gocache</strong></a> not performs well, so remove them out from the bench.
 
-- <a href="https://github.com/patrickmn/go-cache"><strong>gocache</strong></a> is FIFO mode, <a href="https://github.com/FishGoddess/cachego"><strong>cachego</strong></a> and <a href="https://github.com/patrickmn/go-cache"><strong>gocache</strong></a> is simple map with expiration, and others are LRU mode.
+- <a href="https://github.com/patrickmn/go-cache"><strong>gocache</strong></a> is FIFO mode, <a href="https://github.com/FishGoddess/cachego"><strong>cachego</strong></a> and <a href="https://github.com/patrickmn/go-cache"><strong>gocache</strong></a> is simple map with expiration (without hit rate case), and others are LRU mode.
 
 <table style="text-align: center">
    <tr>
