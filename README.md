@@ -15,7 +15,7 @@
 
 - <a href="https://github.com/kpango/gache"><strong>kpango/gache</strong></a> & <a href="https://github.com/hlts2/gocache"><strong>hlts2/gocache</strong></a> not performs well, so remove them out from the benchmark list.
 
-- <a href="https://github.com/patrickmn/go-cache"><strong>patrickmn/go-cache</strong></a> is FIFO mode, <a href="https://github.com/FishGoddess/cachego"><strong>FishGoddess/cachego</strong></a> and <a href="https://github.com/patrickmn/go-cache"><strong>gocache</strong></a> are based on simple map with expiration (without hit rate case), and others are LRU mode.
+- <a href="https://github.com/patrickmn/go-cache"><strong>patrickmn/go-cache</strong></a> is FIFO mode, <a href="https://github.com/FishGoddess/cachego"><strong>FishGoddess/cachego</strong></a> and <a href="https://github.com/patrickmn/go-cache"><strong>patrickmn/go-cache</strong></a> are based on simple map with expiration (without hit rate case), and others are LRU mode.
 
 <table style="text-align: center">
    <tr>
