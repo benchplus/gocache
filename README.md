@@ -56,10 +56,10 @@
    </tr>
    <tr>
       <td>Put1M</td>
-      <td>:x:</td>
+      <td>:snail:</td>
       <td></td>
       <td>:rocket:</td>
-      <td>:x:</td>
+      <td>:snail:</td>
       <td>:airplane:</td>
       <td>:airplane:</td>
    </tr>
@@ -119,7 +119,7 @@
    </tr>
    <tr>
       <td>HeavyWrite1K</td>
-      <td>:x:</td>
+      <td>:snail:</td>
       <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
@@ -128,7 +128,7 @@
    </tr>
    <tr>
       <td>HeavyWrite1KGC</td>
-      <td>:x:</td>
+      <td>:snail:</td>
       <td>:airplane:</td>
       <td>:rocket:</td>
       <td>:rocket:</td>
@@ -146,7 +146,7 @@
    </tr>
 </table>
 
-> :x: for very-slow, :airplane: for fast, :rocket: for very-fast.
+> :snail: for very-slow, :airplane: for fast, :rocket: for very-fast.
 
 # Default parameters
 
