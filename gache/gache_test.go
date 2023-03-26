@@ -8,8 +8,7 @@ import (
 	"time"
 
 	"github.com/benchplus/gocache"
-	"github.com/golang/protobuf/proto"
-	"github.com/kpango/gache"
+	"github.com/kpango/gache/v2"
 )
 
 func TestMain(m *testing.M) {
@@ -21,79 +20,101 @@ func TestMain(m *testing.M) {
 
 func setup() {
 	debug.SetGCPercent(10)
-	gache.New().SetDefaultExpire(10 * time.Second)
 }
 
 func shutdown() {
-	gache.Clear()
 	gocache.PrintGCPause()
 	gocache.PrintMem()
 	gocache.PrintRate()
 }
 
+func BenchmarkHeavyMixedInt_gache(b *testing.B) {
+	gc := gache.New[int]().SetDefaultExpire(10 * time.Second)
+	var wg sync.WaitGroup
+	for index := 0; index < 10000; index++ {
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				gc.Set(gocache.Int64Key(int64(i)), i+1)
+			}
+			wg.Done()
+		}()
+		wg.Add(1)
+		go func() {
+			for i := 0; i < 8192; i++ {
+				gc.Get(gocache.Int64Key(int64(i)))
+			}
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+
+	gocache.AddMem()
+}
+
 func BenchmarkPutInt_gache(b *testing.B) {
+	gc := gache.New[int]().SetDefaultExpire(10 * time.Second)
 	// slen = 512
 	for i := 0; i < b.N; i++ {
-		gache.Set(gocache.Int64Key(int64(i)), i+1)
+		gc.Set(gocache.Int64Key(int64(i)), i+1)
 	}
 }
 
 func BenchmarkGetInt_gache(b *testing.B) {
+	gc := gache.New[string]().SetDefaultExpire(10 * time.Second)
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
-	gache.Set("0", "0")
+	gc.Set("0", "0")
 	for i := 0; i < b.N; i++ {
-		gache.Get("0")
+		gc.Get("0")
 	}
 }
 
 func BenchmarkPut1K_gache(b *testing.B) {
+	gc := gache.New[[]byte]().SetDefaultExpire(10 * time.Second)
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	for i := 0; i < b.N; i++ {
-		gache.Set(gocache.Int64Key(int64(i)), gocache.Data1K)
+		gc.Set(gocache.Int64Key(int64(i)), gocache.Data1K)
 	}
 }
 
 func BenchmarkPut1M_gache(b *testing.B) {
+	gc := gache.New[[]byte]().SetDefaultExpire(10 * time.Second)
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	for i := 0; i < b.N; i++ {
-		gache.Set(gocache.Int64Key(int64(i)), gocache.Data1M)
+		gc.Set(gocache.Int64Key(int64(i)), gocache.Data1M)
 	}
 }
 
 func BenchmarkPutTinyObject_gache(b *testing.B) {
+	gc := gache.New[gocache.UserInfo]().SetDefaultExpire(10 * time.Second)
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	for i := 0; i < b.N; i++ {
-		data, _ := proto.Marshal(&gocache.UserInfo{})
-		gache.Set(gocache.Int64Key(int64(i)), data)
+		gc.Set(gocache.Int64Key(int64(i)), gocache.UserInfo{})
 	}
 }
 
 func BenchmarkChangeOutAllInt_gache(b *testing.B) {
+	gc := gache.New[int]().SetDefaultExpire(10 * time.Second)
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	for i := 0; i < b.N*1024; i++ {
-		gache.Set(gocache.Int64Key(int64(i)), i+1)
+		gc.Set(gocache.Int64Key(int64(i)), i+1)
 	}
 }
 
 func BenchmarkHeavyReadInt_gache(b *testing.B) {
+	gc := gache.New[int]().SetDefaultExpire(10 * time.Second)
 	gocache.GCPause()
 
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	for i := 0; i < 1024; i++ {
-		gache.Set(gocache.Int64Key(int64(i)), i+1)
+		gc.Set(gocache.Int64Key(int64(i)), i+1)
 	}
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 1024; i++ {
-				gache.Get(gocache.Int64Key(int64(i)))
+				gc.Get(gocache.Int64Key(int64(i)))
 			}
 			wg.Done()
 		}()
@@ -104,17 +125,17 @@ func BenchmarkHeavyReadInt_gache(b *testing.B) {
 }
 
 func BenchmarkHeavyWriteInt_gache(b *testing.B) {
+	gc := gache.New[int]().SetDefaultExpire(10 * time.Second)
 	gocache.GCPause()
 
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		start := index
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				gache.Set(gocache.Int64Key(int64(i+start)), i+1)
+				gc.Set(gocache.Int64Key(int64(i+start)), i+1)
 			}
 			wg.Done()
 		}()
@@ -125,17 +146,17 @@ func BenchmarkHeavyWriteInt_gache(b *testing.B) {
 }
 
 func BenchmarkHeavyWrite1K_gache(b *testing.B) {
+	gc := gache.New[[]byte]().SetDefaultExpire(10 * time.Second)
 	gocache.GCPause()
 
 	// slen = 512
-	gache.New().SetDefaultExpire(10 * time.Second)
 	var wg sync.WaitGroup
 	for index := 0; index < 10000; index++ {
 		start := index
 		wg.Add(1)
 		go func() {
 			for i := 0; i < 8192; i++ {
-				gache.Set(gocache.Int64Key(int64(i+start)), gocache.Data1K)
+				gc.Set(gocache.Int64Key(int64(i+start)), gocache.Data1K)
 			}
 			wg.Done()
 		}()
